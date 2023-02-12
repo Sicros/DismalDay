@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class LaserPointer : MonoBehaviour
 {
-    [SerializeField] private CharacterInputs _inputs;
     [SerializeField] private float maxDistance;
     [SerializeField] private LayerMask layerToCollide;
-    [SerializeField] private ZombieAttributes zombie;
-    [SerializeField] private WeaponAttributes weapon;
-    [SerializeField] private string weaponName;
-    private Light pointer;
+    [SerializeField] private CharacterInputs _inputs;
+    private ZombieAttributes _zombie;
+    private WeaponAttributes _weapon;
+    private string _weaponName;
+    private Light _pointer;
 
     private void Start()
     {
-        weaponName = "";
-        TryGetComponent<Light>(out pointer);
-        pointer.enabled = false;
+        _weaponName = "";
+        TryGetComponent<Light>(out _pointer);
+        _pointer.enabled = false;
         GetMainWeapon();
     }
 
@@ -27,24 +27,24 @@ public class LaserPointer : MonoBehaviour
 
     private void GetMainWeapon()
     {
-        if (transform.root.tag != weaponName)
+        if (transform.root.tag != _weaponName)
         {
-            transform.parent.TryGetComponent<WeaponAttributes>(out weapon);
-            weaponName = transform.parent.tag;
+            transform.parent.TryGetComponent<WeaponAttributes>(out _weapon);
+            _weaponName = transform.parent.tag;
         }
     }
 
     private void Shooting()
     {
-        if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.actionButton)))
+        if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.actionButton)) && Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
         {
             RaycastHit hit;
 
             if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
             {
-                zombie = hit.collider.transform.root.GetComponent<ZombieAttributes>();
-                zombie.ReceiveDamage(weapon.damage);
-                Debug.Log(($"Hit: '{hit.transform.tag}' - damage: '{weapon.damage}' - health: '{zombie.currentHealth}'"));
+                _zombie = hit.collider.transform.root.GetComponent<ZombieAttributes>();
+                _zombie.ReceiveDamage(_weapon.damage);
+                Debug.Log(($"Hit: '{hit.transform.tag}' - damage: '{_weapon.damage}' - health: '{_zombie.currentHealth}'"));
             }
         }
     }
@@ -53,11 +53,11 @@ public class LaserPointer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.aimButton)))
         {
-            pointer.enabled = true;
+            _pointer.enabled = true;
         }
         if (Input.GetMouseButtonUp(_inputs.MouseButton(_inputs.aimButton)))
         {
-            pointer.enabled = false;
+            _pointer.enabled = false;
         }
     }
 }

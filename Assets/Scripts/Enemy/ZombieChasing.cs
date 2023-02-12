@@ -15,16 +15,16 @@ public class ZombieChasing : MonoBehaviour
     private void OnTriggerEnter(Collider other){
         if (other.gameObject.tag == "Player")
         {
+            ChasingTransition(true);
             gameObject.GetComponent<SphereCollider>().radius *= 2;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && animator.GetBool("isChasing"))
         {
             ChasingPlayer();
-            ChasingTransition(true);
         }
     }
 
