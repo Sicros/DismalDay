@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 439308678294209330}
   - component: {fileID: 1569532983662831835}
   - component: {fileID: 6371393459727266997}
+  - component: {fileID: 1117903927}
   m_Layer: 0
   m_Name: PointOfShoot
   m_TagString: Untagged
@@ -27,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985160964529726688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.015, z: 0.2091}
+  m_LocalPosition: {x: 0, y: 0.097313225, z: 0.19743574}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7806859626995009055}
-  m_RootOrder: 0
+  m_Father: {fileID: 7806859626995009049}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &439308678294209330
 LineRenderer:
@@ -140,18 +141,18 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 985160964529726688}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.7169812, g: 0.030437866, b: 0.030437866, a: 1}
-  m_Intensity: 100
+  m_Intensity: 9999999
   m_Range: 50
-  m_SpotAngle: 31.410566
-  m_InnerSpotAngle: 31.410566
+  m_SpotAngle: 1
+  m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -209,12 +210,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 1
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 0
   m_LightLayerMask: 1
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!114 &1117903927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 985160964529726688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322e81db92903ce459a31f1e07b9b27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputs: {fileID: 0}
+  maxDistance: 50
+  layerToCollide:
+    serializedVersion: 2
+    m_Bits: 128
+  zombie: {fileID: 0}
+  weapon: {fileID: 0}
+  weaponName: 
 --- !u!1 &7806859626995505717
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +330,7 @@ GameObject:
   - component: {fileID: 7806859626995009049}
   - component: {fileID: 7806859626994206265}
   - component: {fileID: 7806859626993239289}
+  - component: {fileID: 338093498070226353}
   m_Layer: 0
   m_Name: Handgun
   m_TagString: Untagged
@@ -332,6 +354,7 @@ Transform:
   - {fileID: 7806859626995009055}
   - {fileID: 7806859626995009051}
   - {fileID: 7806859626995009045}
+  - {fileID: 1058681596559308938}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
@@ -385,6 +408,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &338093498070226353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7806859626995505721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b82df713012814983e582459521e5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  timeBetweenShoots: 1
 --- !u!1 &7806859626995505723
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,8 +617,7 @@ Transform:
   m_LocalPosition: {x: -0.000000009689333, y: 0.08231322, z: -0.011664265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1058681596559308938}
+  m_Children: []
   m_Father: {fileID: 7806859626995009049}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
