@@ -1,6 +1,14 @@
 using UnityEngine;
 using Cinemachine;
 
+/*
+Permite intercambiar las camaras que siguen al personaje. Actualmente existen dos:
+    1. Primera persona: Utilizada para apuntar y disparar a los enemigos.
+    2. Tercera persona: Utilizado para moverse por el escenario.
+
+Por defecto, las camaras se intercambian con el segundo clic del mouse.
+*/
+
 public class CharacterCamera : MonoBehaviour
 {
     // Variable que identifica a la cámara en primera persona.
@@ -12,6 +20,7 @@ public class CharacterCamera : MonoBehaviour
     // Identifica si la cámara en tercera persona está activada (true) o desactivada (false).
     [SerializeField] private bool activeThirdPerson;
 
+    // Variable que almacena los inputs para mover o rotar al personaje.
     [SerializeField] private CharacterInputs _inputs;
 
     // Se fija la cámara inicial dependiendo del valor que se le asigne a activeThirdPerson.
@@ -24,7 +33,7 @@ public class CharacterCamera : MonoBehaviour
 
     // Similar a la acción realizada en el método de Start(), solo que esta vez es el usuario
     // quien debe presionar una tecla para hacer el cambio entre cámaras. La tecla se define
-    // desde el inspector de Unity.
+    // desde el inspector de Unity, y debe ser un botón del mouse.
     void Update()
     {
         if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.aimButton)))

@@ -233,7 +233,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _inputs: {fileID: 0}
-  shootSound: {fileID: 0}
+  shootSound: {fileID: 2555674103356612803, guid: 903b2084f7672dc47b642e43c17648c1,
+    type: 3}
 --- !u!1 &7806859626995505717
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +333,7 @@ GameObject:
   - component: {fileID: 4439462915272468303}
   m_Layer: 0
   m_Name: Handgun
-  m_TagString: Untagged
+  m_TagString: Handgun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

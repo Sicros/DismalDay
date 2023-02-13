@@ -1,20 +1,47 @@
 using UnityEngine;
 
+/*
+Biblioteca de audios. Se guarda un listado con todos los audios que estén asociados al zombie.
+También se tienen tiempos de esperar entre que un audio en loop se detenga y se vuelva a reproducir.
+Se obtienen las animaciones para conocer el estado en el que se encuentra el zombie actualmente.
+*/
+
 public class ZombieAudio : MonoBehaviour
 {
+    // Intervalo de tiempo con el que se reproduce el audio idle.
     public float timeBetweenIdle;
-    public float timeBetweenChasing;
-    public float timeBetweenAttacking;
-    public AudioSource idleAudio;
-    public AudioSource chasingAudio;
-    public AudioSource attackingAudio;
-    private float _timeNextIdle;
-    private float _timeNextChasing;
-    private float _timeNextAttacking;
-    private Animator _animator;
-    private ZombieAttributes _attributes;
-    private AudioSource _audios;
 
+    // Intervalo de tiempo con el que se reproduce el audio de persecución.
+    public float timeBetweenChasing;
+
+    // Intervalo de tiempo con el que se reproduce el audio de ataque.
+    public float timeBetweenAttacking;
+
+    // Fuente de audio idle.
+    public AudioSource idleAudio;
+
+    // Fuente de audio de persecución.
+    public AudioSource chasingAudio;
+
+    // Fuente de audio de ataque.
+    public AudioSource attackingAudio;
+
+    // Tiempo que va almacenando el próximo momento en que debe ejecutarse el audio idle.
+    private float _timeNextIdle;
+
+    // Tiempo que va almacenando el próximo momento en que debe ejecutarse el audio de persecución.
+    private float _timeNextChasing;
+
+    // Tiempo que va almacenando el próximo momento en que debe ejecutarse el audio de ataque.
+    private float _timeNextAttacking;
+
+    // Variable que almacena las animaciones del zombie.
+    private Animator _animator;
+
+    // Variable que almacena los atributos del zombie.
+    private ZombieAttributes _attributes;
+
+    // Iniciación de las variables de animación y atributos del zombie al comenzar el juego.
     private void Start()
     {
         transform.TryGetComponent<Animator>(out _animator);
@@ -23,6 +50,7 @@ public class ZombieAudio : MonoBehaviour
 
     private void Update()
     {
+        // Si el zombie está atacando, se reproduce el audio de ataque y se detienen los demás.
         if (_animator.GetBool("isAttacking"))
         {
             if (Time.time >= _timeNextAttacking)
@@ -33,6 +61,7 @@ public class ZombieAudio : MonoBehaviour
                 _timeNextAttacking = Time.time + timeBetweenAttacking;
             }
         }
+        // Si el zombie está persiguiendo al personaje, se reproduce el audio de persecución y se detienen los demás.
         else if (_animator.GetBool("isChasing"))
         {
             if (Time.time >= _timeNextChasing)
@@ -43,6 +72,7 @@ public class ZombieAudio : MonoBehaviour
                 _timeNextChasing = Time.time + timeBetweenChasing;
             }
         }
+        // Si ninguno de los casos anteriores se cumplen, se reproduce el audio idle y se detienen los demás.
         else if (Time.time >= _timeNextIdle)
         {
             PlayChasingAudio(false);
@@ -52,6 +82,7 @@ public class ZombieAudio : MonoBehaviour
         }
     }
 
+    // Método que permite detener o reproducir el audio idle gracias a su parámetro booleano.
     private void PlayIdleAudio(bool playAudio)
     {
         if (playAudio)
@@ -64,6 +95,7 @@ public class ZombieAudio : MonoBehaviour
         }
     }
 
+    // Método que permite detener o reproducir el audio de persecución gracias a su parámetro booleano.
     private void PlayChasingAudio(bool playAudio)
     {
         if (playAudio)
@@ -76,6 +108,7 @@ public class ZombieAudio : MonoBehaviour
         }
     }
 
+    // Método que permite detener o reproducir el audio de ataque gracias a su parámetro booleano.
     private void PlayAttackingAudio(bool playAudio)
     {
         if (playAudio)
