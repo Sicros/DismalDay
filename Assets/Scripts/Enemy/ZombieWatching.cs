@@ -2,14 +2,19 @@ using UnityEngine;
 
 public class ZombieWatching : MonoBehaviour
 {
-    [SerializeField] private ZombieController zombie;
-    [SerializeField] private Animator animator;
+    private ZombieAttributes _zombie;
+    private Vector3 _characterPosition;
 
+    private void Start()
+    {
+        transform.parent.parent.TryGetComponent<ZombieAttributes>(out _zombie);
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" && _zombie.currentHealth > 0)
         {
+            _characterPosition = other.transform.position;
             WatchingPlayer();
         }
     }
@@ -18,8 +23,8 @@ public class ZombieWatching : MonoBehaviour
     // mismo método que se encuentra en el script de EnemyWatchingPlayer.cs.
     private void WatchingPlayer()
     {
-        var vectorToPlayer = zombie.player.position - zombie.transform.position;
+        var vectorToPlayer = _characterPosition - _zombie.transform.position;
         Quaternion newRotation = Quaternion.LookRotation(vectorToPlayer);
-        zombie.transform.rotation = Quaternion.Lerp(zombie.transform.rotation, newRotation, Time.deltaTime * zombie.rotationSpeed);
+        _zombie.transform.rotation = Quaternion.Lerp(_zombie.transform.rotation, newRotation, Time.deltaTime * _zombie.rotationSpeed);
     }
 }

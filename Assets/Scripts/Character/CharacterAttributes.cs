@@ -4,35 +4,47 @@ public class CharacterAttributes : MonoBehaviour
 {
     public float currentHealth;
     public float maximumHealth;
-    // private bool isCurable;
+    private Animator _animator;
 
     private void Start()
     {
-        // isCurable = true;
+        transform.TryGetComponent<Animator>(out _animator);
     }
 
     public void ReceiveDamage(float damage)
     {
-        if (currentHealth <= damage)
+        if (currentHealth <= damage && currentHealth != 0)
         {
+            DeathAnimation();
             currentHealth = 0;
-            // isCurable = false;
+            gameObject.tag = "PlayerDeath";
         }
-        else
+        if (currentHealth > damage)
         {
+            GetHitAnimation();
             currentHealth -= damage;
         }
     }
 
     public void ReceiveHeal(float heal)
     {
-        if (currentHealth + heal >= maximumHealth)
+        if (currentHealth + heal >= maximumHealth && currentHealth > 0)
         {
             currentHealth = maximumHealth;
         }
-        else
+        if (currentHealth + heal < maximumHealth && currentHealth > 0)
         {
             currentHealth += heal;
         }
+    }
+
+    public void DeathAnimation()
+    {
+        _animator.SetTrigger("Die");
+    }
+
+    public void GetHitAnimation()
+    {
+        _animator.SetTrigger("getHit");
     }
 }

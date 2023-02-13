@@ -8,6 +8,8 @@ TagManager:
   - Watching
   - Chasing
   - Handgun
+  - PlayerDeath
+  - EnemyDeath
   layers:
   - Default
   - TransparentFX

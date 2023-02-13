@@ -7,16 +7,26 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float speedWalkingDown;
     [SerializeField] private float rotateSpeed;
     [SerializeField] private float timeCompleteRotation;
-    [SerializeField] private Animator animator;
-    public CharacterCamera characterCamera;
     [SerializeField] private CharacterInputs _inputs;
+    private Animator _animator;
+    private CharacterAttributes _attributes;
+    public CharacterCamera characterCamera;
+
+    private void Start()
+    {
+        transform.TryGetComponent<Animator>(out _animator);
+        transform.TryGetComponent<CharacterAttributes>(out _attributes);
+    }
 
     void Update()
     {
-        MoveCharacter();
-        RotateCharacter();
-        AnimationCharacter();
-        RunCharacter();
+        if (_attributes.currentHealth > 0)
+        {
+            MoveCharacter();
+            RotateCharacter();
+            AnimationCharacter();
+            RunCharacter();
+        }
     }
 
     private IEnumerator SmoothlyRotate(float turnDegrees)
@@ -132,17 +142,17 @@ public class CharacterController : MonoBehaviour
 
     private void WalkingTransition(bool _isWalking)
     {
-        animator.SetBool("isWalking", _isWalking);
+        _animator.SetBool("isWalking", _isWalking);
     }
 
     private void RunningTransition(bool _isRunning)
     {
-        animator.SetBool("isRunning", _isRunning);
+        _animator.SetBool("isRunning", _isRunning);
     }
 
     private void WalkingBackTransition(bool _isWalkingBack)
     {
-        animator.SetBool("isWalkingBack", _isWalkingBack);
+        _animator.SetBool("isWalkingBack", _isWalkingBack);
     }
 
 }
