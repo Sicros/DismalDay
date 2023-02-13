@@ -22,7 +22,7 @@ public class CharacterController : MonoBehaviour
     // Tiempo que le toma al personaje realizar un giro de 180° en eje Y.
     [SerializeField] private float timeCompleteRotation;
 
-    // // Variable que almacena los inputs para mover o rotar al personaje.
+    // Variable que almacena los inputs para mover o rotar al personaje.
     [SerializeField] private CharacterInputs _inputs;
 
     // Referencia a componente de animación del personaje.
@@ -97,6 +97,7 @@ public class CharacterController : MonoBehaviour
         while (t < timeCompleteRotation)
         {
             transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t / timeCompleteRotation);
+            characterCamera.firstPerson.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t / timeCompleteRotation);
             yield return null;
             t += Time.deltaTime;
         }

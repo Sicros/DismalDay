@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6721782534762683391}
-  - component: {fileID: 3610406764872629402}
   - component: {fileID: -4043468112359424189}
+  - component: {fileID: 3875000945391156674}
   m_Layer: 0
   m_Name: HandgunSound
   m_TagString: Untagged
@@ -33,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3610406764872629402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2555674103356612803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1e10c7f13eb15e4db6127fca4e20283, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputs: {fileID: 1880418068241585867, guid: e63837183b178aa4f9adf6be6a5fd9ce, type: 3}
 --- !u!135 &-4043468112359424189
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -59,3 +46,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3875000945391156674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2555674103356612803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1e10c7f13eb15e4db6127fca4e20283, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputs: {fileID: 1880418068241585867, guid: e63837183b178aa4f9adf6be6a5fd9ce, type: 3}

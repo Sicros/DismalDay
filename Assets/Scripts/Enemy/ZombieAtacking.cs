@@ -64,6 +64,10 @@ public class ZombieAtacking : MonoBehaviour
                 AttackingTransition(false);
             }
         }
+        if (other.gameObject.tag == "PlayerDeath")
+        {
+            _animator.Rebind();
+        }
     }
 
     // Activador de la salida del personaje del radio. Si la vida del zombie es superior a 0,

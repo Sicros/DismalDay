@@ -48,6 +48,10 @@ public class ZombieChasing : MonoBehaviour
             _characterPosition = other.transform.position;
             ChasingPlayer();
         }
+        if (other.gameObject.tag == "PlayerDeath")
+        {
+            _animator.Rebind();
+        }
     }
 
     // Método que se activa al salir del rango y el objeto tenga una etiqueta de "Player", además de que la

@@ -16,11 +16,11 @@ public class LaserPointer : MonoBehaviour
     // Layers con los que colisiona este puntero.
     [SerializeField] private LayerMask layerToCollide;
     
-    // Variable quue almacena los inputs del jugador.
-    [SerializeField] private CharacterInputs _inputs;
-
     // Objeto que simular el rango de sonido del disparo.
     [SerializeField] private GameObject shootSound;
+    
+    // Variable quue almacena los inputs del jugador.
+    [SerializeField] private CharacterInputs _inputs;
 
     // Variable que almacena los atributos del personaje.
     private CharacterAttributes _character;
@@ -82,11 +82,7 @@ public class LaserPointer : MonoBehaviour
         {
             GetMainWeapon();
             ControlPointer();
-            if (_nextTimeShoot <= Time.time)
-            {
-                Shooting();
-                _nextTimeShoot = Time.time + _weapon.timeBetweenShoots;
-            }
+            Shooting();
         }
     }
 
@@ -108,31 +104,35 @@ public class LaserPointer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.actionButton)) && Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
         {
+            if (_nextTimeShoot <= Time.time)
+            {
             // Variable que almacena la información del objeto con el que colisiona el Raycast.
-            RaycastHit hit;
+                RaycastHit hit;
 
-            // Se reproduce el audio de disparo.
-            _shootAudio.Play();
+                // Se reproduce el audio de disparo.
+                _shootAudio.Play();
 
-            // Solo se consideran aquellos objeto del layer especificado y se ignoran los colliders de tipo trigger.
-            if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
-            {
-                // Variable que almacena los atributos del zombie con el que colisiona el raycast.
-                _zombie = hit.collider.transform.GetComponent<ZombieAttributes>();
+                // Solo se consideran aquellos objeto del layer especificado y se ignoran los colliders de tipo trigger.
+                if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
+                {
+                    // Variable que almacena los atributos del zombie con el que colisiona el raycast.
+                    _zombie = hit.collider.transform.GetComponent<ZombieAttributes>();
 
-                // Invocación del método que provoca daño al zombie.
-                _zombie.ReceiveDamage(_weapon.damage);
+                    // Invocación del método que provoca daño al zombie.
+                    _zombie.ReceiveDamage(_weapon.damage);
+                }
+
+                // En caso de ya existir un objeto instanciado, este se destruye.
+                if (_instantiatedObject != null)
+                {
+                    //Destroy(_instantiatedObject);
+                }
+
+                // Instanciación del objeto con el collider que atraer a los zombis que estén en su radio hasta la
+                // posición en la que se produjo el disparo.
+                //_instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
+                _nextTimeShoot = Time.time + _weapon.timeBetweenShoots;
             }
-
-            // En caso de ya existir un objeto instanciado, este se destruye.
-            if (_instantiatedObject != null)
-            {
-                Destroy(_instantiatedObject);
-            }
-
-            // Instanciación del objeto con el collider que atraer a los zombis que estén en su radio hasta la
-            // posición en la que se produjo el disparo.
-            _instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
         }
     }
 
