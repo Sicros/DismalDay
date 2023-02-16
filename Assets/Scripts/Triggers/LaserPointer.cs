@@ -125,12 +125,12 @@ public class LaserPointer : MonoBehaviour
                 // En caso de ya existir un objeto instanciado, este se destruye.
                 if (_instantiatedObject != null)
                 {
-                    //Destroy(_instantiatedObject);
+                    Destroy(_instantiatedObject);
                 }
 
                 // Instanciación del objeto con el collider que atraer a los zombis que estén en su radio hasta la
                 // posición en la que se produjo el disparo.
-                //_instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
+                _instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
                 _nextTimeShoot = Time.time + _weapon.timeBetweenShoots;
             }
         }

@@ -9,7 +9,7 @@ Se simula el sonido de los pasas cada vez que ocurre esta colisión.
 public class WalkingSound : MonoBehaviour
 {
     // Fuente de audio. Esta es la que reproduce los sonidos de pasos.
-    [SerializeField] private AudioSource audio;
+    [SerializeField] private new AudioSource audio;
 
     // Distancia entre los pasos y el suelo antes de que se reproduzca el sonido.
     [SerializeField] private float maxDistance;
