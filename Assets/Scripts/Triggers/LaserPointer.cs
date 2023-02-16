@@ -106,7 +106,7 @@ public class LaserPointer : MonoBehaviour
         {
             if (_nextTimeShoot <= Time.time)
             {
-            // Variable que almacena la información del objeto con el que colisiona el Raycast.
+                // Variable que almacena la información del objeto con el que colisiona el Raycast.
                 RaycastHit hit;
 
                 // Se reproduce el audio de disparo.

@@ -13,10 +13,18 @@ public class ZombieWatching : MonoBehaviour
     // Variable que almacena la posición del zombie.
     private Vector3 _characterPosition;
 
+    private Animator _animator;
+
     // Inicialización de la variable que almacena los atributos del zombie al comienzo del juego.
     private void Start()
     {
         transform.parent.parent.TryGetComponent<ZombieAttributes>(out _zombie);
+        transform.parent.parent.TryGetComponent<Animator>(out _animator);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        _animator.SetBool("isWatching", true);
     }
 
     // Si un objeto con la etiqueta "Player" se queda en este radio de activación, el zombie
@@ -29,6 +37,11 @@ public class ZombieWatching : MonoBehaviour
             _characterPosition = other.transform.position;
             WatchingPlayer();
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        _animator.SetBool("isWatching", false);
     }
 
     // Método que permite al enemigo observar al jugador desde su posición. Se obtiene a partir
