@@ -43,8 +43,14 @@ public class LaserPointer : MonoBehaviour
     // Fuente de audio del disparo.
     private AudioSource _shootAudio;
 
+    // Fuente de audio del disparo de un arma vacía.
+    private AudioSource _emptyShootAudio;
+
     // Momento en el que se puede realizar el próximo disparo.
     private float _nextTimeShoot;
+
+    // Momento en el que terminar de cagar el arma.
+    private float _timeToReload;
 
     private void Start()
     {
@@ -67,10 +73,13 @@ public class LaserPointer : MonoBehaviour
         _instantiatedObject = null;
 
         // Componente del audio de disparo.
-        transform.parent.TryGetComponent<AudioSource>(out _shootAudio);
+        transform.parent.Find("Audios/Shoot").TryGetComponent<AudioSource>(out _shootAudio);
+
+        // Componente del audio de disparo vacío.
+        transform.parent.Find("Audios/EmptyShoot").TryGetComponent<AudioSource>(out _emptyShootAudio);
 
         // Componen de los atributos del personaje.
-        transform.Find("/Room/Swat").TryGetComponent<CharacterAttributes>(out _character);
+        transform.Find("/Swat").TryGetComponent<CharacterAttributes>(out _character);
     }
 
     // En cada frame se obtiene la información que está utilizando el personaje, el estado del puntero
@@ -104,34 +113,49 @@ public class LaserPointer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.actionButton)) && Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
         {
-            if (_nextTimeShoot <= Time.time)
+            if (_weapon.currentBullets > 0)
             {
-                // Variable que almacena la información del objeto con el que colisiona el Raycast.
-                RaycastHit hit;
-
-                // Se reproduce el audio de disparo.
-                _shootAudio.Play();
-
-                // Solo se consideran aquellos objeto del layer especificado y se ignoran los colliders de tipo trigger.
-                if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
+                if (_nextTimeShoot <= Time.time && _timeToReload <= Time.time && _weapon.currentBullets > 0)
                 {
-                    // Variable que almacena los atributos del zombie con el que colisiona el raycast.
-                    _zombie = hit.collider.transform.GetComponent<ZombieAttributes>();
+                    // Variable que almacena la información del objeto con el que colisiona el Raycast.
+                    RaycastHit hit;
 
-                    // Invocación del método que provoca daño al zombie.
-                    _zombie.ReceiveDamage(_weapon.damage);
+                    // Descuenta una bala de la carga actual de la pistola.
+                    _weapon.currentBullets--;
+
+                    // Se reproduce el audio de disparo.
+                    _shootAudio.Play();
+
+                    // Solo se consideran aquellos objeto del layer especificado y se ignoran los colliders de tipo trigger.
+                    if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
+                    {
+                        // Variable que almacena los atributos del zombie con el que colisiona el raycast.
+                        _zombie = hit.collider.transform.GetComponent<ZombieAttributes>();
+
+                        // Invocación del método que provoca daño al zombie.
+                        _zombie.ReceiveDamage(_weapon.damage);
+                    }
+
+                    // En caso de ya existir un objeto instanciado, este se destruye.
+                    if (_instantiatedObject != null)
+                    {
+                        Destroy(_instantiatedObject);
+                    }
+
+                    // Instanciación del objeto con el collider que atraer a los zombis que estén en su radio hasta la
+                    // posición en la que se produjo el disparo.
+                    _instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
+                    _nextTimeShoot = Time.time + _weapon.timeBetweenShoots;
                 }
-
-                // En caso de ya existir un objeto instanciado, este se destruye.
-                if (_instantiatedObject != null)
-                {
-                    Destroy(_instantiatedObject);
-                }
-
-                // Instanciación del objeto con el collider que atraer a los zombis que estén en su radio hasta la
-                // posición en la que se produjo el disparo.
-                _instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
-                _nextTimeShoot = Time.time + _weapon.timeBetweenShoots;
+            }
+            else if (_character.inventoryCharacter[1].quantity > 0)
+            {
+                _weapon.currentBullets = _character.substractItem(1, 15);
+                _timeToReload = Time.time + _weapon.reloadTime;
+            }
+            else
+            {
+                _emptyShootAudio.Play();
             }
         }
     }

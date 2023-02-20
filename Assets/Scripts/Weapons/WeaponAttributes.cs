@@ -12,4 +12,13 @@ public class WeaponAttributes : MonoBehaviour
 
     // Tiempo de espera antes de realizar otro disparo.
     public float timeBetweenShoots;
+
+    // Cantidad máxima de balas que puede llevar por carga.
+    public int maxBullets;
+
+    // Cantidad máxima de balas que puede llevar por carga.
+    public int currentBullets;
+
+    // Time to reload wepon
+    public float reloadTime;
 }
