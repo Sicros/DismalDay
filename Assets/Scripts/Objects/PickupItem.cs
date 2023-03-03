@@ -5,7 +5,7 @@ public class PickupItem : MonoBehaviour
     [SerializeField] private int id;
     [SerializeField] private int quantity;
     [SerializeField] private AudioSource pickupObject;
-    [SerializeField] private CharacterAttributes _character;
+    [SerializeField] private CharacterEntity _character;
 
     private void OnTriggerEnter(Collider other)
     {

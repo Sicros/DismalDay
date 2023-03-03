@@ -38,14 +38,10 @@ public class ZombieAudio : MonoBehaviour
     // Variable que almacena las animaciones del zombie.
     private Animator _animator;
 
-    // Variable que almacena los atributos del zombie.
-    private ZombieAttributes _attributes;
-
     // Iniciación de las variables de animación y atributos del zombie al comenzar el juego.
     private void Start()
     {
         transform.TryGetComponent<Animator>(out _animator);
-        transform.TryGetComponent<ZombieAttributes>(out _attributes);
     }
 
     private void Update()

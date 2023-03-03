@@ -23,10 +23,10 @@ public class LaserPointer : MonoBehaviour
     [SerializeField] private CharacterInputs _inputs;
 
     // Variable que almacena los atributos del personaje.
-    private CharacterAttributes _character;
+    private CharacterEntity _character;
 
     // Variable que almacena los atributos del zombie.
-    private ZombieAttributes _zombie;
+    private ZombieEntity _zombie;
 
     // Variable que almacena los atributos del arma del personaje.
     private WeaponAttributes _weapon;
@@ -79,7 +79,7 @@ public class LaserPointer : MonoBehaviour
         transform.parent.Find("Audios/EmptyShoot").TryGetComponent<AudioSource>(out _emptyShootAudio);
 
         // Componen de los atributos del personaje.
-        transform.Find("/Swat").TryGetComponent<CharacterAttributes>(out _character);
+        transform.Find("/Swat").TryGetComponent<CharacterEntity>(out _character);
     }
 
     // En cada frame se obtiene la información que está utilizando el personaje, el estado del puntero
@@ -87,7 +87,7 @@ public class LaserPointer : MonoBehaviour
     // realizan si la vida el personaje es superior a 0.
     private void Update()
     {
-        if (_character.currentHealth > 0)
+        if (_character.GetCurrentHealth() > 0)
         {
             GetMainWeapon();
             ControlPointer();
@@ -130,7 +130,7 @@ public class LaserPointer : MonoBehaviour
                     if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
                     {
                         // Variable que almacena los atributos del zombie con el que colisiona el raycast.
-                        _zombie = hit.collider.transform.GetComponent<ZombieAttributes>();
+                        _zombie = hit.collider.transform.GetComponent<ZombieEntity>();
 
                         // Invocación del método que provoca daño al zombie.
                         _zombie.ReceiveDamage(_weapon.damage);

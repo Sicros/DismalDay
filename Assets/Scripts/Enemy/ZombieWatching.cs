@@ -8,7 +8,7 @@ un pequeño delay en este seguimiento.
 public class ZombieWatching : MonoBehaviour
 {
     // Variable que almacena los atributos del zombie.
-    private ZombieAttributes _zombie;
+    private ZombieEntity _zombie;
 
     // Variable que almacena la posición del zombie.
     private Vector3 _characterPosition;
@@ -18,7 +18,7 @@ public class ZombieWatching : MonoBehaviour
     // Inicialización de la variable que almacena los atributos del zombie al comienzo del juego.
     private void Start()
     {
-        transform.parent.parent.TryGetComponent<ZombieAttributes>(out _zombie);
+        transform.parent.parent.TryGetComponent<ZombieEntity>(out _zombie);
         transform.parent.parent.TryGetComponent<Animator>(out _animator);
     }
 
@@ -32,7 +32,7 @@ public class ZombieWatching : MonoBehaviour
     // Para realizar esta acción, la vida del zombie debe ser superior a 0.
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && _zombie.currentHealth > 0)
+        if (other.gameObject.tag == "Player" && _zombie.GetCurrentHealth() > 0)
         {
             _characterPosition = other.transform.position;
             WatchingPlayer();
@@ -51,6 +51,6 @@ public class ZombieWatching : MonoBehaviour
     {
         var vectorToPlayer = _characterPosition - _zombie.transform.position;
         Quaternion newRotation = Quaternion.LookRotation(vectorToPlayer);
-        _zombie.transform.rotation = Quaternion.Lerp(_zombie.transform.rotation, newRotation, Time.deltaTime * _zombie.rotationSpeed);
+        _zombie.transform.rotation = Quaternion.Lerp(_zombie.transform.rotation, newRotation, Time.deltaTime * _zombie.GetRotationSpeed());
     }
 }

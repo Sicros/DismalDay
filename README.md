@@ -33,3 +33,13 @@ En este modo serás más lento y solo podras avanzar hacía delante, atrás y ro
 - Ten en cuenta que tanto el enemigo como tu tienen un tiempo de espera entre cada ataque, por lo que antes de disparar se recomienda estar seguro que el tiro impactará.
 - El enemigo va mucho más rápido de lo que tu caminas, pero más lento de lo que corres. Es recomendable mantener la distancia antes de atacar.
 - Tanto tu como el enemigo disponen de 10 puntos de vida, con la diferencia que el personaje posee una pistola que inflige 2 de daño mientras que el enemigo quita 3 de daño por cada manotazo, eso sin contar que ellos son muchos y tu eres solo uno.
+- A lo largo del escenario encontrarás munición para tu arma. Ten en cuenta que esta tiene un capacidad limitada de balas que puede llevar y una vez sean utilizadas tu personaje debe cargar.
+- Puedes llevar un límite máximo de 60 balas en tu inventario y 15 en tu pistola.
+
+## Futuras actualizaciones
+
+Se están trabajando en nuevas actualizaciones para este juego, además de la implementadas por los desafíos. A continuación, se entrega un listado de estas:
+- Botiquines: Se incluirán nuevos objetos a lo largo del escenario correspondientes a botiquines. Esto podrán ser utilizados por el personaje para curar su vida actual.
+- Pantallas de carga: Se incluirán pantallas de carga entre la carga de cada escena. Esto con el fin de evitar que quede la sensación de que el juego se haya congelado.
+- Cargar en cualquier momento: Se añadirá un botón que permite cargar el arma en cualquier momento. Actualmente se debe vaciar el cargador para que se pueda volver a cargar.
+- Mejora en la IA de zombies: Actualmente los zombies al escuchar un ruido o visualizar al jugador, intentarán dirigirse directamente al punto, independientemente de si existe un muro entre ellos y su destino. Esto será mejorado para que puedan distinguir si existe un objeto entre ellos y puedan cambiar su dirección par aasí acercarse a su objetivo.

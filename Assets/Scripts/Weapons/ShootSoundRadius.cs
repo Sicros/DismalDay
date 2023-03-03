@@ -32,7 +32,7 @@ public class ShootSoundRadius : MonoBehaviour
     private Dictionary <int, Transform> _zombiesTransform = new Dictionary <int, Transform> ();
 
     // Diccionario que almacena los atributos de los zombies. La llave corresponde al ID de estos.
-    private Dictionary <int, ZombieAttributes> _zombiesAttributes = new Dictionary <int, ZombieAttributes> ();
+    private Dictionary <int, ZombieEntity> _zombiesEntities = new Dictionary <int, ZombieEntity> ();
 
     // Diccionario que almacena las animaciones de los zombies. La llave corresponde al ID de estos.
     private Dictionary <int, Animator> _zombiesAnimator = new Dictionary <int, Animator> ();
@@ -57,14 +57,14 @@ public class ShootSoundRadius : MonoBehaviour
             // Transforms, atributos y animaciones en un diccionario con su respectivo ID como llave.
             int id = other.gameObject.GetInstanceID();
             Transform _zombieTransform = other.transform;
-            ZombieAttributes _zombieAttributes = other.transform.GetComponent<ZombieAttributes>();
+            ZombieEntity _zombieAttributes = other.transform.GetComponent<ZombieEntity>();
             Animator _zombieAnimator = other.transform.GetComponent<Animator>();
             if (!_zombiesId.Contains(id))
             {
                 _zombiesId.Add(id);
             }
             _zombiesTransform.Add(id, _zombieTransform);
-            _zombiesAttributes.Add(id, _zombieAttributes);
+            _zombiesEntities.Add(id, _zombieAttributes);
             _zombiesAnimator.Add(id, _zombieAnimator);
             _zombiesFollowing.Add(id, true);
         }
@@ -91,10 +91,10 @@ public class ShootSoundRadius : MonoBehaviour
                     _zombiesAnimator[_zombieId].SetBool("justWalking", true);
 
                     // Centra la mirada en el punto que se generó el disparo
-                    WatchingShoot(_zombiesTransform[_zombieId], _zombiesAttributes[_zombieId]);
+                    WatchingShoot(_zombiesTransform[_zombieId], _zombiesEntities[_zombieId]);
 
                     // Camina hacia el punto de la bala. Se retorna un booleanos que corresponde al estado del zombie.
-                    _zombiesFollowing[_zombieId] = ChasingShoot(_zombiesTransform[_zombieId], _zombiesAttributes[_zombieId], _zombiesAnimator[_zombieId]);
+                    _zombiesFollowing[_zombieId] = ChasingShoot(_zombiesTransform[_zombieId], _zombiesEntities[_zombieId], _zombiesAnimator[_zombieId]);
                 }
                 else
                 {
@@ -103,7 +103,7 @@ public class ShootSoundRadius : MonoBehaviour
 
                     // Se eliminan los componentes de cada diccionario para ahorrar recursos.
                     _zombiesTransform.Remove(_zombieId);
-                    _zombiesAttributes.Remove(_zombieId);
+                    _zombiesEntities.Remove(_zombieId);
                     _zombiesAnimator.Remove(_zombieId);
                 }
             }
@@ -117,7 +117,7 @@ public class ShootSoundRadius : MonoBehaviour
 
     // Método que permite al zombie avanzar hasta el punto de disparo. Requiere los atributos, transform y animaciones del zombie.
     // Tener en cuenta que se cambia el valor del eje Y al zombie para evitar que el objeto pueda avanzar o rotar hacia esta dirección.
-    private bool ChasingShoot(Transform _zombieTransform, ZombieAttributes _zombieAttributes, Animator _zombieAnimator)
+    private bool ChasingShoot(Transform _zombieTransform, ZombieEntity _zombieAttributes, Animator _zombieAnimator)
     {
         Vector3 shootNewPosition = new Vector3 (
             ShootPosition.x,
@@ -125,9 +125,9 @@ public class ShootSoundRadius : MonoBehaviour
             ShootPosition.z
         );
         var vectorToShoot = shootNewPosition - _zombieTransform.position;
-        if (vectorToShoot.magnitude > _zombieAttributes.keepDistanceShoot)
+        if (vectorToShoot.magnitude > _zombieAttributes.GetKeepDistanceShoot())
         {
-            _zombieTransform.position += new Vector3 (vectorToShoot.normalized.x, 0, vectorToShoot.normalized.z) * _zombieAttributes.chasingSpeed * Time.deltaTime;
+            _zombieTransform.position += new Vector3 (vectorToShoot.normalized.x, 0, vectorToShoot.normalized.z) * _zombieAttributes.GetSpeedWalkingUp() * Time.deltaTime;
         }
         else
         {
@@ -139,7 +139,7 @@ public class ShootSoundRadius : MonoBehaviour
 
     // Método que permite al zombie rotar hacia el punto de disparo. Requiere los atributos y transform del zombie.
     // Tener en cuenta que se cambia el valor del eje Y al zombie para evitar que el objeto pueda avanzar o rotar hacia esta dirección.
-    private void WatchingShoot(Transform _zombieTransform, ZombieAttributes _zombieAttributes)
+    private void WatchingShoot(Transform _zombieTransform, ZombieEntity _zombieAttributes)
     {
         Vector3 shootNewPosition = new Vector3 (
             ShootPosition.x,
@@ -148,6 +148,6 @@ public class ShootSoundRadius : MonoBehaviour
         );
         var vectorToShoot = shootNewPosition - _zombieTransform.position;
         Quaternion newRotation = Quaternion.LookRotation(vectorToShoot);
-        _zombieTransform.rotation = Quaternion.Lerp(_zombieTransform.rotation, newRotation, Time.deltaTime * _zombieAttributes.rotationSpeed);
+        _zombieTransform.rotation = Quaternion.Lerp(_zombieTransform.rotation, newRotation, Time.deltaTime * _zombieAttributes.GetRotationSpeed());
     }
 }

@@ -24,7 +24,7 @@ public class UIText : MonoBehaviour
 
     // Clase con los atributos del personaje. Utilizado para conocer su
     // inventario y vida.
-    [SerializeField] private CharacterAttributes _characterAttributes;
+    [SerializeField] private CharacterEntity _character;
 
     // Clase con los atributos del arma. Utilizado para conocer su munición
     // actual y la carga máxima que puede llevar.
@@ -34,9 +34,9 @@ public class UIText : MonoBehaviour
     // impresos en la UI del juego.
     private void Update()
     {
-        _textCurrentHealth.text = _characterAttributes.currentHealth.ToString();
-        _textMaxHealth.text = "/ " + _characterAttributes.maximumHealth.ToString();
+        _textCurrentHealth.text = _character.GetCurrentHealth().ToString();
+        _textMaxHealth.text = "/ " + _character.GetMaximumHealth().ToString();
         _textCurrentAmmo.text = _weaponAttributes.currentBullets.ToString() + " / " + _weaponAttributes.maxBullets.ToString();
-        _textInventoryAmmo.text = _characterAttributes.inventoryCharacter[1].quantity.ToString();
+        _textInventoryAmmo.text = _character.inventoryCharacter[1].quantity.ToString();
     }
 }

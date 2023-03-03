@@ -9,7 +9,7 @@ Viene acompañada con sus respectivas animaciones y atributos que pueda tener el
 public class ZombieChasing : MonoBehaviour
 {
     // Variable que almacena los atributos del zombie.
-    private ZombieAttributes _zombie;
+    private ZombieEntity _zombie;
 
     // Variable que almacena las animaciones del zombie.
     private Animator _animator;
@@ -23,7 +23,7 @@ public class ZombieChasing : MonoBehaviour
     // Inicialización de variable de animación, atributos del zombie y radio de activación.
     private void Start()
     {
-        transform.parent.parent.TryGetComponent<ZombieAttributes>(out _zombie);
+        transform.parent.parent.TryGetComponent<ZombieEntity>(out _zombie);
         transform.parent.parent.TryGetComponent<Animator>(out _animator);
         _originalTriggerRadius = gameObject.GetComponent<SphereCollider>().radius;
     }
@@ -31,7 +31,7 @@ public class ZombieChasing : MonoBehaviour
     // Método que se activa al ingresar en el rango un objeto con la etiqueta "Player" y si la vida
     // del zombie es mayor a 0. Activa la animación de persecución y duplica el radio de activación del mismo.
     private void OnTriggerEnter(Collider other){
-        if (other.gameObject.tag == "Player" && _zombie.currentHealth > 0)
+        if (other.gameObject.tag == "Player" && _zombie.GetCurrentHealth() > 0)
         {
             ChasingTransition(true);
             gameObject.GetComponent<SphereCollider>().radius *= 2;
@@ -43,7 +43,7 @@ public class ZombieChasing : MonoBehaviour
     // y, gracias al método de persecución, lo intenta perseguir hasta su ubicación.
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" && _animator.GetBool("isChasing") && _zombie.currentHealth > 0)
+        if (other.gameObject.tag == "Player" && _animator.GetBool("isChasing") && _zombie.GetCurrentHealth() > 0)
         {
             _characterPosition = other.transform.position;
             ChasingPlayer();
@@ -59,7 +59,7 @@ public class ZombieChasing : MonoBehaviour
     // la animación de persecución.
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player" && _zombie.currentHealth > 0)
+        if (other.gameObject.tag == "Player" && _zombie.GetCurrentHealth() > 0)
         {
             gameObject.GetComponent<SphereCollider>().radius = _originalTriggerRadius;
             ChasingTransition(false);
@@ -72,9 +72,9 @@ public class ZombieChasing : MonoBehaviour
     private void ChasingPlayer()
     {
         var vectorToPlayer = _characterPosition - _zombie.transform.position;
-        if (vectorToPlayer.magnitude > _zombie.keepDistance)
+        if (vectorToPlayer.magnitude > _zombie.GetKeepDistancePlayer())
         {
-            _zombie.transform.position += vectorToPlayer.normalized * _zombie.chasingSpeed * Time.deltaTime;
+            _zombie.transform.position += vectorToPlayer.normalized * _zombie.GetSpeedWalkingUp() * Time.deltaTime;
         }
     }
 
