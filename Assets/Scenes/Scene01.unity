@@ -318,8 +318,6 @@ MonoBehaviour:
   _textMaxHealth: {fileID: 415260798}
   _textCurrentAmmo: {fileID: 2008631548}
   _textInventoryAmmo: {fileID: 935708495}
-  _character: {fileID: 5844351007063920261}
-  _weaponAttributes: {fileID: 1256754636}
 --- !u!1001 &5538071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1229,6 +1227,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a271fde7aad44b5a8ec8025c447c359, type: 3}
+--- !u!114 &396697303 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8693246970362511606, guid: a5f22621a9866a4488ef4828d99d06ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 5844351007063920259}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322e81db92903ce459a31f1e07b9b27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &415260796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5895,6 +5905,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieData: {fileID: 11400000, guid: bbf1fa333b4c3c040be4c45b45603c60, type: 2}
+--- !u!82 &1680265041 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1123123902, guid: a5f22621a9866a4488ef4828d99d06ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 5844351007063920259}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1687823342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3707059952967786148, guid: 57da21dfd59e2044ba23f11ad6a91e8f,
@@ -7110,6 +7126,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieData: {fileID: 11400000, guid: bbf1fa333b4c3c040be4c45b45603c60, type: 2}
+--- !u!82 &2080685519 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1933208367, guid: a5f22621a9866a4488ef4828d99d06ed,
+    type: 3}
+  m_PrefabInstance: {fileID: 5844351007063920259}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2125388500
 GameObject:
   m_ObjectHideFlags: 0
@@ -8212,9 +8234,84 @@ PrefabInstance:
       objectReference: {fileID: 1444334294}
     - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
         type: 3}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 1256754636}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
       propertyPath: itemList
       value: 
       objectReference: {fileID: 880230484}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletInventoryChangeUE.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5270582}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateHealthUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletInventoryChangeUE.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletInventoryChangeUE.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5270582}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletInventoryChangeUE.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletInventoryChangeUE.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateBulletInventoryUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIText, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletInventoryChangeUE.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIText, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5844351007063920261, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletInventoryChangeUE.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6238038794742150576, guid: a5f22621a9866a4488ef4828d99d06ed,
         type: 3}
       propertyPath: m_RootOrder
@@ -8274,6 +8371,67 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Swat
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: ShootAudio
+      value: 
+      objectReference: {fileID: 1680265041}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: _laserPointer
+      value: 
+      objectReference: {fileID: 396697303}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: _weaponObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 438c55f0b88652c48b03b9a35465d321,
+        type: 2}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: EmptyShootAudio
+      value: 
+      objectReference: {fileID: 2080685519}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: _characterEntity
+      value: 
+      objectReference: {fileID: 5844351007063920261}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletChange.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletChange.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5270582}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletChange.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletChange.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UpdateBulletWeaponUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletChange.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIText, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7484990498271729608, guid: a5f22621a9866a4488ef4828d99d06ed,
+        type: 3}
+      propertyPath: onBulletChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8693246970362511606, guid: a5f22621a9866a4488ef4828d99d06ed,
         type: 3}

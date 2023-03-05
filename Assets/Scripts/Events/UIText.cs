@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 /*
 Pensado en la UI del juego. Se encargar de mostrar los valores correspondientes
@@ -22,21 +21,28 @@ public class UIText : MonoBehaviour
     // Texto relacionado a la munición que se tiene en el inventario.
     [SerializeField] private TMP_Text _textInventoryAmmo;
 
-    // Clase con los atributos del personaje. Utilizado para conocer su
-    // inventario y vida.
-    [SerializeField] private CharacterEntity _character;
-
-    // Clase con los atributos del arma. Utilizado para conocer su munición
-    // actual y la carga máxima que puede llevar.
-    [SerializeField] private WeaponAttributes _weaponAttributes;
-
-    // En cada frame se consultan los valores definidos anteriormente, para que puedan ser
-    // impresos en la UI del juego.
-    private void Update()
+    // Método llamado al cambiar la vida del personaje. Se actualiza este valor y la vida máxima
+    // que tiene hasta el momento en la UI.
+    public void UpdateHealthUI(float currentHealth, float maximumHealth)
     {
-        _textCurrentHealth.text = _character.GetCurrentHealth().ToString();
-        _textMaxHealth.text = "/ " + _character.GetMaximumHealth().ToString();
-        _textCurrentAmmo.text = _weaponAttributes.currentBullets.ToString() + " / " + _weaponAttributes.maxBullets.ToString();
-        _textInventoryAmmo.text = _character.inventoryCharacter[1].quantity.ToString();
+        Debug.Log("Event: onHealthChange / From: CharacterEntity / To: UIText");
+        _textCurrentHealth.text = currentHealth.ToString();
+        _textMaxHealth.text = "/ " + maximumHealth.ToString();
+    }
+
+    // Método llamado al cambiar la munición que tiene cargada el arma. Obtiene la munición actual
+    // y máxima del arma actual para imprimirlo en la UI.
+    public void UpdateBulletWeaponUI(int currentBullets, int maxBullets)
+    {
+        Debug.Log("Event: onBulletChange / From: WeaponAttributes / To: UIText");
+        _textCurrentAmmo.text = currentBullets.ToString() + " / " + maxBullets.ToString();
+    }
+
+    // Método llamado al cambair la munición que lleva el personaje en su inventario.
+    // Cambia el valor de este que se muestra en la UI.
+    public void UpdateBulletInventoryUI(int bulletsInventory)
+    {
+        Debug.Log("Event: onBulletInventoryChangeUE / From: CharacterEntity / To: UIText");
+        _textInventoryAmmo.text = bulletsInventory.ToString();
     }
 }

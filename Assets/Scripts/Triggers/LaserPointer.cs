@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 /*
 Simula ser el puntero laser del arma utilizada por el personaje. Se apoya en este mismo puntero
@@ -40,25 +41,18 @@ public class LaserPointer : MonoBehaviour
     // Variable que guarda la información de un objeto instanciado.
     private GameObject _instantiatedObject;
 
-    // Fuente de audio del disparo.
-    private AudioSource _shootAudio;
+    // Variable que permite saber si el arma puede ser disparada, ya sea porque no tiene munición
+    // o que esté siendo cargada.
+    private bool _weaponCanShoot;
 
-    // Fuente de audio del disparo de un arma vacía.
-    private AudioSource _emptyShootAudio;
-
-    // Momento en el que se puede realizar el próximo disparo.
-    private float _nextTimeShoot;
-
-    // Momento en el que terminar de cagar el arma.
-    private float _timeToReload;
+    // Evento que identifica el disparo de un arma. Activa el método del mismo nombre
+    // que contiene WeaponAttributes.
+    public event Action onShoot; 
 
     private void Start()
     {
         // Inicialización del nombre del arma como vacío.
         _weaponName = "";
-
-        // Inicialización del momento del próximo disparo.
-        _nextTimeShoot = 0f;
 
         // Componente de luz asociado al objeto.
         TryGetComponent<Light>(out _pointer);
@@ -72,14 +66,12 @@ public class LaserPointer : MonoBehaviour
         // Inicialización de la variable referida al objeto instanciado.
         _instantiatedObject = null;
 
-        // Componente del audio de disparo.
-        transform.parent.Find("Audios/Shoot").TryGetComponent<AudioSource>(out _shootAudio);
-
-        // Componente del audio de disparo vacío.
-        transform.parent.Find("Audios/EmptyShoot").TryGetComponent<AudioSource>(out _emptyShootAudio);
-
         // Componen de los atributos del personaje.
         transform.Find("/Swat").TryGetComponent<CharacterEntity>(out _character);
+
+        // Agrega el método como suscriptor al evento de onBulletShot.
+        // Permite definir si el arma puede seguir siendo utilizada.
+        _weapon.onBulletShot += WeaponCanShootHandler;
     }
 
     // En cada frame se obtiene la información que está utilizando el personaje, el estado del puntero
@@ -113,49 +105,31 @@ public class LaserPointer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.actionButton)) && Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
         {
-            if (_weapon.currentBullets > 0)
+            onShoot?.Invoke();
+            if (_weaponCanShoot)
             {
-                if (_nextTimeShoot <= Time.time && _timeToReload <= Time.time && _weapon.currentBullets > 0)
+                // Variable que almacena la información del objeto con el que colisiona el Raycast.
+                RaycastHit hit;
+
+                // Solo se consideran aquellos objeto del layer especificado y se ignoran los colliders de tipo trigger.
+                if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
                 {
-                    // Variable que almacena la información del objeto con el que colisiona el Raycast.
-                    RaycastHit hit;
+                    // Variable que almacena los atributos del zombie con el que colisiona el raycast.
+                    _zombie = hit.collider.transform.GetComponent<ZombieEntity>();
 
-                    // Descuenta una bala de la carga actual de la pistola.
-                    _weapon.currentBullets--;
-
-                    // Se reproduce el audio de disparo.
-                    _shootAudio.Play();
-
-                    // Solo se consideran aquellos objeto del layer especificado y se ignoran los colliders de tipo trigger.
-                    if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
-                    {
-                        // Variable que almacena los atributos del zombie con el que colisiona el raycast.
-                        _zombie = hit.collider.transform.GetComponent<ZombieEntity>();
-
-                        // Invocación del método que provoca daño al zombie.
-                        _zombie.ReceiveDamage(_weapon.damage);
-                    }
-
-                    // En caso de ya existir un objeto instanciado, este se destruye.
-                    if (_instantiatedObject != null)
-                    {
-                        Destroy(_instantiatedObject);
-                    }
-
-                    // Instanciación del objeto con el collider que atraer a los zombis que estén en su radio hasta la
-                    // posición en la que se produjo el disparo.
-                    _instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
-                    _nextTimeShoot = Time.time + _weapon.timeBetweenShoots;
+                    // Invocación del método que provoca daño al zombie.
+                    _zombie.ReceiveDamage(_weapon.GetDamageWeapon());
                 }
-            }
-            else if (_character.inventoryCharacter[1].quantity > 0)
-            {
-                _weapon.currentBullets = _character.substractItem(1, 15);
-                _timeToReload = Time.time + _weapon.reloadTime;
-            }
-            else
-            {
-                _emptyShootAudio.Play();
+
+                // En caso de ya existir un objeto instanciado, este se destruye.
+                if (_instantiatedObject != null)
+                {
+                    Destroy(_instantiatedObject);
+                }
+
+                // Instanciación del objeto con el collider que atrae a los zombis que estén en su radio hasta la
+                // posición en la que se produjo el disparo.
+                _instantiatedObject = Instantiate(shootSound, transform.position, transform.rotation);
             }
         }
     }
@@ -171,6 +145,22 @@ public class LaserPointer : MonoBehaviour
         if (Input.GetMouseButtonUp(_inputs.MouseButton(_inputs.aimButton)))
         {
             _pointer.enabled = false;
+        }
+    }
+
+    // Método que recibe como parámetros la munición actual del arma y el tiempo en que
+    // puede volver a ser utilizada. Si el primer párametro es 0 o aún no se cumple
+    // el tiempo definido, se indicará que el arma no puede ser utilizada aún.
+    private void WeaponCanShootHandler(int currentBullets, float timeFinishReload)
+    {
+        Debug.Log("Event: onBulletShot / From: WeaponAttributes / To: LaserPointer");
+        if (currentBullets > 0 && timeFinishReload <= Time.time)
+        {
+            _weaponCanShoot = true;
+        }
+        else
+        {
+            _weaponCanShoot = false;
         }
     }
 }

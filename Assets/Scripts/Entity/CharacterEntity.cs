@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Events;
+using System;
 
 public class CharacterEntity : ObjectEntity
 {
@@ -18,6 +20,18 @@ public class CharacterEntity : ObjectEntity
     // Posición 2: Llaves -> Número de llaves que sirven para abrir puertas.
     public Item[] inventoryCharacter = new Item [3];
 
+    // Referencia al arma que lleva el personaje.
+    [SerializeField] private WeaponAttributes _weapon;
+
+    // Evento C# relacionado al cambio de la vida actual del personaje.
+    public UnityEvent<float, float> onHealthChange;
+
+    // Evento Unity relacionado al cambio de la munición que lleva el personaje en su inventario.
+    public UnityEvent<int> onBulletInventoryChangeUE;
+
+    // Evento C# relacionado al cambio de la munición que lleva el personaje en su inventario.
+    public event Action<int> onBulletInventoryChange;
+
     // Se asigna la vida máxima al personaje como vida actual.
     private void Awake()
     {
@@ -32,6 +46,8 @@ public class CharacterEntity : ObjectEntity
         inventoryCharacter[0] = itemList.GetItem(0, 0);
         inventoryCharacter[1] = itemList.GetItem(1, 0);
         inventoryCharacter[2] = itemList.GetItem(2, 0);
+        _weapon.onBulletReload += substractItem;
+        onBulletInventoryChangeUE?.Invoke(inventoryCharacter[1].quantity);
     }
 
     // Método que reproduce la animación de muerte del personaje.
@@ -48,41 +64,40 @@ public class CharacterEntity : ObjectEntity
     }
 
     // Método con el que se agregan objetos al inventario. Se revisa el máximo que puede llevar.
-    public bool addItem(int id, int getQuantity)
+    public void addItem(int id, int getQuantity)
     {
-        if (inventoryCharacter[id].quantity == inventoryCharacter[id].maxQuantity)
-        {
-            return false;
-        }
-        else if (inventoryCharacter[id].quantity + getQuantity >= inventoryCharacter[id].maxQuantity)
+        if (inventoryCharacter[id].quantity + getQuantity >= inventoryCharacter[id].maxQuantity)
         {
             inventoryCharacter[id].quantity = inventoryCharacter[id].maxQuantity;
-            return true;
         }
         else
         {
             inventoryCharacter[id].quantity += getQuantity;
-            return true;
+        }
+        if (id == 1)
+        {
+            onBulletInventoryChange?.Invoke(inventoryCharacter[id].quantity);
+            onBulletInventoryChangeUE?.Invoke(inventoryCharacter[id].quantity);
         }
     }
 
     // Método con el que se quitan objetos del inventario. Se revisa el mínimo que puede llevar.
-    public int substractItem(int id, int substractQuantity)
+    public void substractItem(int id, int substractQuantity)
     {
-        if (inventoryCharacter[id].quantity == 0)
-        {
-            return 0;
-        }
-        else if (inventoryCharacter[id].quantity - substractQuantity <= 0)
+        Debug.Log("Event: onBulletReload / From: WeaponAttributes / To: CharacterEntity");
+        if (inventoryCharacter[id].quantity - substractQuantity <= 0)
         {
             int currentQuantity = inventoryCharacter[id].quantity;
             inventoryCharacter[id].quantity = 0;
-            return currentQuantity;
         }
         else
         {
             inventoryCharacter[id].quantity -= substractQuantity;
-            return substractQuantity;
+        }
+        if (id == 1)
+        {
+            onBulletInventoryChange?.Invoke(inventoryCharacter[id].quantity);
+            onBulletInventoryChangeUE?.Invoke(inventoryCharacter[id].quantity);
         }
     }
 
@@ -112,6 +127,7 @@ public class CharacterEntity : ObjectEntity
             // Se resta el daño de la vida actual del personaje.
             _currentHealth -= damage;
         }
+        onHealthChange?.Invoke(_currentHealth, characterData.maximumHealth);
     }
 
     // Método utilizado para curar al personaje. Se entrega un valor de tipo float llamada heal
@@ -128,6 +144,7 @@ public class CharacterEntity : ObjectEntity
         {
             _currentHealth += heal;
         }
+        onHealthChange?.Invoke(_currentHealth, characterData.maximumHealth);
     }
 
     // Método para alterar la velocidad de movimiento del personaje. Se espera un valor de tipo float
