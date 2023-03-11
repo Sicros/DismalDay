@@ -21,6 +21,15 @@ public class UIText : MonoBehaviour
     // Texto relacionado a la munición que se tiene en el inventario.
     [SerializeField] private TMP_Text _textInventoryAmmo;
 
+    // Texto relacionado a las interacciones con objetos del escenario.
+    [SerializeField] private TMP_Text _textInteraction;
+
+    // Inicia el texto de interacción como nulo.
+    private void Awake()
+    {
+        UpdateInteractionObject("");
+    }
+
     // Método llamado al cambiar la vida del personaje. Se actualiza este valor y la vida máxima
     // que tiene hasta el momento en la UI.
     public void UpdateHealthUI(float currentHealth, float maximumHealth)
@@ -44,5 +53,13 @@ public class UIText : MonoBehaviour
     {
         Debug.Log("Event: onBulletInventoryChangeUE / From: CharacterEntity / To: UIText");
         _textInventoryAmmo.text = bulletsInventory.ToString();
+    }
+
+    // Método para cambiar el texto mostrado en las interacciones con objetos.
+    // De acuerdo al objeto que lo llame, se mostrará un texto en medio de la pantalla
+    // asociado a este.
+    public void UpdateInteractionObject(string textToPrint)
+    {
+        _textInteraction.text = textToPrint;
     }
 }

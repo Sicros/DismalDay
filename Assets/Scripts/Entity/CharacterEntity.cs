@@ -29,6 +29,9 @@ public class CharacterEntity : ObjectEntity
     // Evento Unity relacionado al cambio de la munición que lleva el personaje en su inventario.
     public UnityEvent<int> onBulletInventoryChangeUE;
 
+    // Evento C# relacionado al cambio de la vida actual del personaje, para eventos C#.
+    public Action<float, float> onHealthChangeC;
+
     // Evento C# relacionado al cambio de la munición que lleva el personaje en su inventario.
     public event Action<int> onBulletInventoryChange;
 
@@ -48,6 +51,7 @@ public class CharacterEntity : ObjectEntity
         inventoryCharacter[2] = itemList.GetItem(2, 0);
         _weapon.onBulletReload += substractItem;
         onBulletInventoryChangeUE?.Invoke(inventoryCharacter[1].quantity);
+        onHealthChangeC?.Invoke(_currentHealth, characterData.maximumHealth);
     }
 
     // Método que reproduce la animación de muerte del personaje.
@@ -128,6 +132,7 @@ public class CharacterEntity : ObjectEntity
             _currentHealth -= damage;
         }
         onHealthChange?.Invoke(_currentHealth, characterData.maximumHealth);
+        onHealthChangeC?.Invoke(_currentHealth, characterData.maximumHealth);
     }
 
     // Método utilizado para curar al personaje. Se entrega un valor de tipo float llamada heal
@@ -145,6 +150,7 @@ public class CharacterEntity : ObjectEntity
             _currentHealth += heal;
         }
         onHealthChange?.Invoke(_currentHealth, characterData.maximumHealth);
+        onHealthChangeC?.Invoke(_currentHealth, characterData.maximumHealth);
     }
 
     // Método para alterar la velocidad de movimiento del personaje. Se espera un valor de tipo float
