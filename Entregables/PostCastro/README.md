@@ -1,10 +1,12 @@
 # Desafío Post-Processing y Reflection Probes
 
+Desafío relacionada a Post-Processing y Reflection Probes. Se agregaron distintos objetos y scrips para lograr completar este desafío. También se hicieron varios arreglos adicionales para facilitar el uso de objetos, inventarios, entre otros elementos del juego.
+
+A continuación se entrega el detalle de cada uno de ellos además del enlace de descarga con el UnityPackage.
+
 ## Enlace de descarga de UnityPackage
 
 [https://drive.google.com/file/d/1lu2OmKsvmnhYeX2ZYRyrZ9Pz9h_kEAPN/view?usp=sharing](https://drive.google.com/file/d/1lu2OmKsvmnhYeX2ZYRyrZ9Pz9h_kEAPN/view?usp=sharing)
-
-A continuación se entrega el detalle de cada uno de ellos.
 
 ## Post-Processing
 
