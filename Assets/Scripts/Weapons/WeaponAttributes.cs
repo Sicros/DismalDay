@@ -13,7 +13,7 @@ public class WeaponAttributes : MonoBehaviour
     [SerializeField] private WeaponObject _weaponObject;
 
     // Referencia a los atributos del personaje.
-    [SerializeField] private CharacterEntity _characterEntity;
+    [SerializeField] private InventoryController _inventoryController;
 
     // Referencia al audio que se escucha al disparar un arma cargada.
     [SerializeField] private AudioSource ShootAudio;
@@ -42,18 +42,21 @@ public class WeaponAttributes : MonoBehaviour
     // Evento Unity que es invocado al momento que la munición actual del arma cambia.
     public UnityEvent<int, int> onBulletChange;
 
-    private void Start()
+    private void Awake()
     {
-        // Se asigna la munición máxima a la cantidad actual del arma.
-        _currentBullets = _weaponObject.maxBullets;
-
         // Agrega como suscriptor el método HasBulletsInInventoryHandler al evento onBulletInventoryChange.
         // de la clase CharacterEntity
-        _characterEntity.onBulletInventoryChange += HasBulletsInInventoryHandler;
+        _inventoryController.onBulletInventoryChange += HasBulletsInInventoryHandler;
 
         // Agrega como suscriptor el método ShootWeapon al evento onShoot de la clase LaserPointer.
         _laserPointer.onShoot += ShootWeapon;
 
+        // Se asigna la munición máxima a la cantidad actual del arma.
+        _currentBullets = _weaponObject.maxBullets;
+    }
+
+    private void Start()
+    {
         // Invoca los eventos definidos en esta clase para inicializar las variables de otras.
         onBulletShot?.Invoke(_currentBullets, 0);
         onBulletChange?.Invoke(_currentBullets, _weaponObject.maxBullets);
@@ -66,6 +69,7 @@ public class WeaponAttributes : MonoBehaviour
     public void ShootWeapon()
     {
         Debug.Log("Event: onShoot / From: LaserPointer / To: WeaponAttributes");
+        Debug.Log(_currentInventoryBullets);
         onBulletShot?.Invoke(_currentBullets, _timeNextShoot);
         if (_timeNextShoot < Time.time)
         {
@@ -94,7 +98,6 @@ public class WeaponAttributes : MonoBehaviour
     public void ReloadWeapon()
     {
         _timeNextShoot = Time.time + _weaponObject.reloadTime;
-        onBulletReload?.Invoke(1, _weaponObject.maxBullets);
         if (_currentInventoryBullets >= _weaponObject.maxBullets)
         {
             _currentBullets = _weaponObject.maxBullets;
@@ -103,13 +106,14 @@ public class WeaponAttributes : MonoBehaviour
         {
             _currentBullets = _currentInventoryBullets;
         }
+        onBulletReload?.Invoke(1, _weaponObject.maxBullets);
     }
 
     // Obtiene la cantidad de balas que tiene el personaje en su inventario para utilizar
     // este valor en otros métodos.
     public void HasBulletsInInventoryHandler(int inventoryBullets)
     {
-        Debug.Log("Event: onBulletInventoryChange / From: CharacterEntity / To: WeaponAttributes");
+        Debug.Log("Event: onBulletInventoryChange / From: InventoryController / To: WeaponAttributes");
         _currentInventoryBullets = inventoryBullets;
     }
 

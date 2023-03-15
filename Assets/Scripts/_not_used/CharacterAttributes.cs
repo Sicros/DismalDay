@@ -30,9 +30,9 @@ public class CharacterAttributes2 : MonoBehaviour
     {
         // Obtención del componente de animación al inicio del juego.
         transform.TryGetComponent<Animator>(out _animator);
-        inventoryCharacter[0] = itemList.GetItem(0, 0);
-        inventoryCharacter[1] = itemList.GetItem(1, 0);
-        inventoryCharacter[2] = itemList.GetItem(2, 0);
+        // inventoryCharacter[0] = itemList.GetItem(0, 0);
+        // inventoryCharacter[1] = itemList.GetItem(1, 0);
+        // inventoryCharacter[2] = itemList.GetItem(2, 0);
     }
 
     public void ReceiveDamage(float damage)
@@ -89,42 +89,42 @@ public class CharacterAttributes2 : MonoBehaviour
         _animator.SetTrigger("getHit");
     }
 
-    // Método con el que se agregan objetos al inventario. Se revisa el máximo que puede llevar.
-    public bool addItem(int id, int getQuantity)
-    {
-        if (inventoryCharacter[id].quantity == inventoryCharacter[id].maxQuantity)
-        {
-            return false;
-        }
-        else if (inventoryCharacter[id].quantity + getQuantity >= inventoryCharacter[id].maxQuantity)
-        {
-            inventoryCharacter[id].quantity = inventoryCharacter[id].maxQuantity;
-            return true;
-        }
-        else
-        {
-            inventoryCharacter[id].quantity += getQuantity;
-            return true;
-        }
-    }
+    // // Método con el que se agregan objetos al inventario. Se revisa el máximo que puede llevar.
+    // public bool addItem(int id, int getQuantity)
+    // {
+    //     if (inventoryCharacter[id].quantity == inventoryCharacter[id].maxQuantity)
+    //     {
+    //         return false;
+    //     }
+    //     else if (inventoryCharacter[id].quantity + getQuantity >= inventoryCharacter[id].maxQuantity)
+    //     {
+    //         inventoryCharacter[id].quantity = inventoryCharacter[id].maxQuantity;
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         inventoryCharacter[id].quantity += getQuantity;
+    //         return true;
+    //     }
+    // }
 
-    // Método con el que se quitan objetos del inventario. Se revisa el mínimo que puede llevar.
-    public int substractItem(int id, int substractQuantity)
-    {
-        if (inventoryCharacter[id].quantity == 0)
-        {
-            return 0;
-        }
-        else if (inventoryCharacter[id].quantity - substractQuantity <= 0)
-        {
-            int currentQuantity = inventoryCharacter[id].quantity;
-            inventoryCharacter[id].quantity = 0;
-            return currentQuantity;
-        }
-        else
-        {
-            inventoryCharacter[id].quantity -= substractQuantity;
-            return substractQuantity;
-        }
-    }
+    // // Método con el que se quitan objetos del inventario. Se revisa el mínimo que puede llevar.
+    // public int substractItem(int id, int substractQuantity)
+    // {
+    //     if (inventoryCharacter[id].quantity == 0)
+    //     {
+    //         return 0;
+    //     }
+    //     else if (inventoryCharacter[id].quantity - substractQuantity <= 0)
+    //     {
+    //         int currentQuantity = inventoryCharacter[id].quantity;
+    //         inventoryCharacter[id].quantity = 0;
+    //         return currentQuantity;
+    //     }
+    //     else
+    //     {
+    //         inventoryCharacter[id].quantity -= substractQuantity;
+    //         return substractQuantity;
+    //     }
+    // }
 }

@@ -51,7 +51,8 @@ public class UIText : MonoBehaviour
     // Cambia el valor de este que se muestra en la UI.
     public void UpdateBulletInventoryUI(int bulletsInventory)
     {
-        Debug.Log("Event: onBulletInventoryChangeUE / From: CharacterEntity / To: UIText");
+        Debug.Log("Event: onBulletInventoryChangeUE / From: InventoryController / To: UIText");
+        Debug.Log(bulletsInventory);
         _textInventoryAmmo.text = bulletsInventory.ToString();
     }
 

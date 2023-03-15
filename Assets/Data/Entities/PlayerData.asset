@@ -17,3 +17,4 @@ MonoBehaviour:
   speedWalkingDown: 1.5
   rotationSpeed: 90
   timeCompleteRotation: 0.5
+  currentHealth: 10

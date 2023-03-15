@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 /*
 Canvas del menú principal. Permite interactuar con los botones del menú principal.
@@ -12,6 +13,17 @@ public class CanvasController : MonoBehaviour
     // Botón para iniciar un nuevo juego.
     [SerializeField] private Button _startButton;
 
+    [SerializeField] private LoadSceneController _loadSceneController;
+
+    public event Action<string> onStartGame;
+
+    [SerializeField] private string sceneName;
+
+    private void Awake()
+    {
+        onStartGame += _loadSceneController.LoadScene;
+    }
+
     private void Update()
     {
         _startButton.onClick.AddListener(StartGame);
@@ -20,6 +32,6 @@ public class CanvasController : MonoBehaviour
     // MNétodo que inicia el nuevo juego. Se encarga de cargar la nueva escena.
     private void StartGame()
     {
-        SceneManager.LoadScene("Scene01", LoadSceneMode.Single);
+        onStartGame?.Invoke(sceneName);
     }
 }
