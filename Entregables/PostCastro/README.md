@@ -2,7 +2,7 @@
 
 ## Enlace de descarga de UnityPackage
 
-[a link](https://drive.google.com/file/d/1lu2OmKsvmnhYeX2ZYRyrZ9Pz9h_kEAPN/view?usp=sharing)
+[https://drive.google.com/file/d/1lu2OmKsvmnhYeX2ZYRyrZ9Pz9h_kEAPN/view?usp=sharing](https://drive.google.com/file/d/1lu2OmKsvmnhYeX2ZYRyrZ9Pz9h_kEAPN/view?usp=sharing)
 
 A continuación se entrega el detalle de cada uno de ellos.
 
