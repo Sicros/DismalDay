@@ -24,17 +24,34 @@ public class UIText : MonoBehaviour
     // Texto relacionado a las interacciones con objetos del escenario.
     [SerializeField] private TMP_Text _textInteraction;
 
+    // Texto relacionado a la lectura de documentos.
+    [SerializeField] private TMP_Text _textDocument;
+
+    // Tiempo de espera antes de borrar el mensaje impreso en el panel de interacciones.
+    [SerializeField] private float timeBetweenInteractions;
+
+    // Próximo momento en que se eliminará el mensaje impreso.
+    private float _timeToDeleteInteraction;
+
     // Inicia el texto de interacción como nulo.
     private void Awake()
     {
         UpdateInteractionObject("");
     }
 
+    // Revisa que no exista ningún mensaje impreso pasado el tiempo definido.
+    private void Update()
+    {
+        if (_textInteraction.text != "" && _timeToDeleteInteraction <= Time.time)
+        {
+            _textInteraction.text = "";
+        }
+    }
+
     // Método llamado al cambiar la vida del personaje. Se actualiza este valor y la vida máxima
     // que tiene hasta el momento en la UI.
     public void UpdateHealthUI(float currentHealth, float maximumHealth)
     {
-        Debug.Log("Event: onHealthChange / From: CharacterEntity / To: UIText");
         _textCurrentHealth.text = currentHealth.ToString();
         _textMaxHealth.text = "/ " + maximumHealth.ToString();
     }
@@ -43,15 +60,13 @@ public class UIText : MonoBehaviour
     // y máxima del arma actual para imprimirlo en la UI.
     public void UpdateBulletWeaponUI(int currentBullets, int maxBullets)
     {
-        Debug.Log("Event: onBulletChange / From: WeaponAttributes / To: UIText");
         _textCurrentAmmo.text = currentBullets.ToString() + " / " + maxBullets.ToString();
     }
 
-    // Método llamado al cambair la munición que lleva el personaje en su inventario.
+    // Método llamado al cambiar la munición que lleva el personaje en su inventario.
     // Cambia el valor de este que se muestra en la UI.
     public void UpdateBulletInventoryUI(int bulletsInventory)
     {
-        Debug.Log("Event: onBulletInventoryChangeUE / From: InventoryController / To: UIText");
         Debug.Log(bulletsInventory);
         _textInventoryAmmo.text = bulletsInventory.ToString();
     }
@@ -62,5 +77,11 @@ public class UIText : MonoBehaviour
     public void UpdateInteractionObject(string textToPrint)
     {
         _textInteraction.text = textToPrint;
+        _timeToDeleteInteraction = Time.time + timeBetweenInteractions;
+    }
+
+    public void UpdateDocumenText(string textToPrint)
+    {
+        _textDocument.text = textToPrint;
     }
 }

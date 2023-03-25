@@ -13,7 +13,16 @@ public class OpenMainDoor : MonoBehaviour
     [SerializeField] private CharacterInputs _characterInputs;
 
     [SerializeField] private LoadSceneController _loadSceneController;
+
+    [SerializeField] private InventoryController _inventoryController;
+
     [SerializeField] private string sceneName;
+
+    [SerializeField] private int idKey;
+
+    [SerializeField] private bool isOpen;
+
+    [SerializeField] private string nameDoor;
 
     private void Awake()
     {
@@ -29,7 +38,19 @@ public class OpenMainDoor : MonoBehaviour
             && isTriggerActive
         )
         {
-            onAction?.Invoke(sceneName);
+            if (isOpen)
+            {
+                onAction?.Invoke(sceneName);
+            }
+            else if (_inventoryController.GetQuantityObject(idKey) > 0)
+            {
+                onInteraction?.Invoke("La puerta " + nameDoor + " ha sido abierta");
+                isOpen = true;
+            }
+            else
+            {
+                onInteraction?.Invoke("La puerta " + nameDoor + " está cerrada");
+            }
         }
     }
 
@@ -38,7 +59,6 @@ public class OpenMainDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isTriggerActive = true;
-            onInteraction?.Invoke("Press shoot key to open door.");
         }
     }
 
@@ -47,7 +67,26 @@ public class OpenMainDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isTriggerActive = false;
-            onInteraction?.Invoke("");
         }
+    }
+
+    public void OpenDoor()
+    {
+        isOpen = true;
+    }
+
+    public void TextDoorOpen()
+    {
+        onInteraction?.Invoke("La puerta " + nameDoor + " ha sido abierta");
+    }
+
+    public void TextDoorClosed()
+    {
+        onInteraction?.Invoke("La puerta " + nameDoor + " está cerrada");
+    }
+
+    public bool GetStatusDoor()
+    {
+        return isOpen;
     }
 }

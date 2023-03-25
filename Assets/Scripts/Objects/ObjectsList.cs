@@ -15,8 +15,7 @@ public class ObjectsList : MonoBehaviour
             0,
             new Item {
                 nameObject = "Medkit",
-                description = "Heals 5 HP",
-                type = "HealingObject",
+                description = "Cura 5 puntos de vida",
                 healAmount = 5f,
                 maxQuantity = 3,
                 consumable = true,
@@ -26,8 +25,8 @@ public class ObjectsList : MonoBehaviour
         itemLibrary.Add(
             1,
             new Item {
-                nameObject = "Handguns's Bullets",
-                description = "Ammunition for Handgun weapon",
+                nameObject = "Balas pistola",
+                description = "Munición para la pistola",
                 healAmount = 0f,
                 maxQuantity = 60,
                 consumable = true,
@@ -37,11 +36,11 @@ public class ObjectsList : MonoBehaviour
         itemLibrary.Add(
             2,
                 new Item {
-                nameObject = "Key door",
-                description = "Key to open doors",
+                nameObject = "LLave complejo de oficinas",
+                description = "Llave que permite abrir la puerta principal del complejo de oficinas",
                 healAmount = 0f,
-                maxQuantity = 999,
-                consumable = false,
+                maxQuantity = 1,
+                consumable = true,
                 keyItem = true
             }
         );
@@ -53,7 +52,6 @@ public class ObjectsList : MonoBehaviour
 public struct Item {
     public string nameObject;
     public string description;
-    public string type;
     public float healAmount;
     public int maxQuantity;
     public bool consumable;

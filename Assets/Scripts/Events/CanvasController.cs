@@ -22,10 +22,6 @@ public class CanvasController : MonoBehaviour
     private void Awake()
     {
         onStartGame += _loadSceneController.LoadScene;
-    }
-
-    private void Update()
-    {
         _startButton.onClick.AddListener(StartGame);
     }
 

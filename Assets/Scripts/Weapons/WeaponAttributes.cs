@@ -68,7 +68,6 @@ public class WeaponAttributes : MonoBehaviour
     // reproducir, entre otros.
     public void ShootWeapon()
     {
-        Debug.Log("Event: onShoot / From: LaserPointer / To: WeaponAttributes");
         Debug.Log(_currentInventoryBullets);
         onBulletShot?.Invoke(_currentBullets, _timeNextShoot);
         if (_timeNextShoot < Time.time)
@@ -113,7 +112,6 @@ public class WeaponAttributes : MonoBehaviour
     // este valor en otros métodos.
     public void HasBulletsInInventoryHandler(int inventoryBullets)
     {
-        Debug.Log("Event: onBulletInventoryChange / From: InventoryController / To: WeaponAttributes");
         _currentInventoryBullets = inventoryBullets;
     }
 

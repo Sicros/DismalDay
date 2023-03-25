@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Scene00.unity
+    path: Assets/Scenes/ConfigScreen/MainMenu.unity
     guid: 63d6346cad1cbb449acc24a9bff9b977
   - enabled: 1
-    path: Assets/Scenes/Scene01.unity
+    path: Assets/Scenes/OfficeBuilding/MainHall.unity
     guid: b808a65de05fe434a996c3d8e4fffd7e
   - enabled: 1
-    path: Assets/Scenes/Scene02.unity
+    path: Assets/Scenes/Outside/Snowfield.unity
     guid: 201a591465ad2a444b4308a2bfd3c069
+  - enabled: 1
+    path: Assets/Scenes/OfficeBuilding/MeetingRoom01.unity
+    guid: d4c5b667bac5ddc4db55c49a58f26942
   m_configObjects: {}

@@ -8,7 +8,7 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private CharacterData _characterData;
 
     // Referencia a la biblioteca de objetos del juego.
-    private ObjectsList objectsList;
+    [SerializeField] private ObjectsList objectsList;
 
     // Referencia a los atributos del arma.
     [SerializeField] private WeaponAttributes _weaponAttributes;
@@ -28,7 +28,7 @@ public class InventoryController : MonoBehaviour
     // Obtiene el componente de la biblioteca de objetos y hace las primeras invocaciones de eventos.
     private void Start()
     {
-        gameObject.TryGetComponent<ObjectsList>(out objectsList);
+        // gameObject.TryGetComponent<ObjectsList>(out objectsList);
         onBulletInventoryChange?.Invoke(GetQuantityObject(1));
         onBulletInventoryChangeUE?.Invoke(GetQuantityObject(1));
     }

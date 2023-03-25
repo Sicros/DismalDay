@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 752155569714320790}
   - component: {fileID: 7700549036664495166}
   - component: {fileID: 4512602959633398988}
+  - component: {fileID: 1622501994}
   m_Layer: 0
   m_Name: AmmoBox
   m_TagString: Untagged
@@ -114,7 +115,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 8
-  m_Range: 0.5
+  m_Range: 1
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -199,6 +200,22 @@ MonoBehaviour:
   quantity: 15
   pickupObject: {fileID: 7815940762119639545}
   inventoryController: {fileID: 0}
+  characterInputs: {fileID: 0}
+  uiText: {fileID: 0}
+  _objectList: {fileID: 0}
+--- !u!135 &1622501994
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145165998672086327}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.113000005, z: -0.007910401}
 --- !u!1 &7936299094126549701
 GameObject:
   m_ObjectHideFlags: 0
