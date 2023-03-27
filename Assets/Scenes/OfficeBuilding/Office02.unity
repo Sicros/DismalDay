@@ -249,7 +249,6 @@ MonoBehaviour:
   _textDocument: {fileID: 248124059}
   timeBetweenInteractions: 5
   _gameOverObject: {fileID: 1302573328}
-  _loadSceneController: {fileID: 880230486}
 --- !u!1001 &5538071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3005,7 +3004,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3071,7 +3070,6 @@ MonoBehaviour:
   quantity: 1
   pickupObject: {fileID: 465692185}
   inventoryController: {fileID: 907284388}
-  characterInputs: {fileID: 880230483}
   uiText: {fileID: 5270582}
   _objectList: {fileID: 1493408574}
 --- !u!4 &592904677 stripped
@@ -7923,7 +7921,6 @@ MonoBehaviour:
   firstPerson: {fileID: 1295802059}
   thirdPerson: {fileID: 1147683715}
   activeThirdPerson: 1
-  _inputs: {fileID: 880230483}
 --- !u!4 &1444334295
 Transform:
   m_ObjectHideFlags: 0
@@ -9501,7 +9498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3826b2b1e4f0e4a98745fc80e46910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneController: {fileID: 880230486}
   player: {fileID: 1498490227}
   sceneInfo: {fileID: 11400000, guid: 418707fa6f0f872498e5ca3329bbc161, type: 2}
 --- !u!1 &1809719229

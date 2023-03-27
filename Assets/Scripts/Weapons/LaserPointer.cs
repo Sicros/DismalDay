@@ -21,7 +21,7 @@ public class LaserPointer : MonoBehaviour
     [SerializeField] private GameObject shootSound;
     
     // Variable quue almacena los inputs del jugador.
-    [SerializeField] private CharacterInputs _inputs;
+    private CharacterInputs _inputs;
 
     // Variable que almacena los atributos del personaje.
     private CharacterEntity _character;
@@ -51,6 +51,8 @@ public class LaserPointer : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        
         // Inicialización del nombre del arma como vacío.
         _weaponName = "";
 

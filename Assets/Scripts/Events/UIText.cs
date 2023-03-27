@@ -32,14 +32,15 @@ public class UIText : MonoBehaviour
 
     [SerializeField] private GameObject _gameOverObject;
 
-    [SerializeField] private LoadSceneController _loadSceneController;
+    private LoadSceneController _loadSceneController;
 
     // Próximo momento en que se eliminará el mensaje impreso.
     private float _timeToDeleteInteraction;
 
     // Inicia el texto de interacción como nulo.
-    private void Awake()
+    private void Start()
     {
+        GameManager.instance.TryGetComponent<LoadSceneController>(out _loadSceneController);
         UpdateInteractionObject("");
         _gameOverObject.SetActive(false);
     }

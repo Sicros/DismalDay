@@ -24,6 +24,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
         transform.TryGetComponent<Animator>(out _animator);
         transform.TryGetComponent<CharacterEntity>(out _characterEntity);
     }

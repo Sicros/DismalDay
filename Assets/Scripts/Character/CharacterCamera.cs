@@ -21,13 +21,14 @@ public class CharacterCamera : MonoBehaviour
     [SerializeField] private bool activeThirdPerson;
 
     // Variable que almacena los inputs para mover o rotar al personaje.
-    [SerializeField] private CharacterInputs _inputs;
+    private CharacterInputs _inputs;
 
     // Se fija la cámara inicial dependiendo del valor que se le asigne a activeThirdPerson.
     // Si está activo, se usará la cámara en tercera persona, de lo contrario será en
     // primera persona.
-    void Awake()
+    void Start()
     {
+        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
         activeThirdPerson = ChangeCamera(activeThirdPerson, firstPerson, thirdPerson);
     }
 

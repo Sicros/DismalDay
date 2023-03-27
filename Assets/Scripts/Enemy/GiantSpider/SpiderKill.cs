@@ -8,7 +8,7 @@ public class SpiderKill : MonoBehaviour
 
     [SerializeField] private float timeToPrintMessage;
 
-    [SerializeField] private LoadSceneController _loadSceneController;
+    private LoadSceneController _loadSceneController;
 
     private float _nextPrintMessage;
 
@@ -16,6 +16,7 @@ public class SpiderKill : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.TryGetComponent<LoadSceneController>(out _loadSceneController);
         _isEndGame = false;
     }
 

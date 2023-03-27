@@ -15,25 +15,26 @@ public class PickupItem : MonoBehaviour
     // Referencia al inventario del personaje.
     [SerializeField] private InventoryController inventoryController;
 
-    // Referencia a los inputs del personaje.
-    [SerializeField] private CharacterInputs characterInputs;
-
     // Referencia a UIText
     [SerializeField] private UIText uiText;
 
     // Referencia a biblioteca de objetos.
     [SerializeField] private ObjectsList _objectList;
 
+    // Referencia a los inputs del personaje.
+    private CharacterInputs _inputs;
+
+    private void Start()
+    {
+        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+    }
+
     // Al entrar en contacto con el objeto, este será recogido, siempre y cuando
     // el personaje tenga espacio en su inventario o no lleve la cantidad máxima del
     // objeto.
     private void OnTriggerStay(Collider other)
     {
-        if (
-            other.tag == "Player"
-            && Input.GetMouseButtonDown(characterInputs.MouseButton(characterInputs.actionButton))
-            && !Input.GetMouseButton(characterInputs.MouseButton(characterInputs.aimButton))
-        )
+        if (other.tag == "Player" && Input.GetKeyDown(_inputs.interactionKey))
         {
             pickupObject.Play();
             inventoryController.AddItem(id, quantity);

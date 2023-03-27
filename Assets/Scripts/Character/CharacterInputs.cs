@@ -32,6 +32,9 @@ public class CharacterInputs : MonoBehaviour
     // Tecla que permite al personaje correr (duplicar velocidad).
     public KeyCode runKey;
 
+    // Tecla que permite al personaje interactura con su entorno.
+    public KeyCode interactionKey;
+
     // Botón de apuntado. Utilizado también para el cambio de cámara.
     public MouseKeys aimButton;
 

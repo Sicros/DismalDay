@@ -13,14 +13,15 @@ public class CanvasController : MonoBehaviour
     // Botón para iniciar un nuevo juego.
     [SerializeField] private Button _startButton;
 
-    [SerializeField] private LoadSceneController _loadSceneController;
+    private LoadSceneController _loadSceneController;
 
     public event Action<string> onStartGame;
 
     [SerializeField] private string sceneName;
 
-    private void Awake()
+    private void Start()
     {
+        GameManager.instance.TryGetComponent<LoadSceneController>(out _loadSceneController);
         onStartGame += _loadSceneController.LoadScene;
         _startButton.onClick.AddListener(StartGame);
     }

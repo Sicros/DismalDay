@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class OpenCodeDoor : MonoBehaviour
 {
-    // Referencia a los inputs del personaje.
-    [SerializeField] private CharacterInputs characterInputs;
-
     [SerializeField] private OpenMainDoor openMainDoor;
 
     [SerializeField] private string codeDoor;
 
     [SerializeField] private GameObject canvasObject;
+    
+    // Referencia a los inputs del personaje.
+    private CharacterInputs _inputs;
 
-    private void Awake()
+    private void Start()
     {
+        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
         canvasObject.SetActive(false);
     }
 
@@ -28,8 +29,7 @@ public class OpenCodeDoor : MonoBehaviour
     {
         if (
             other.tag == "Player"
-            && Input.GetMouseButtonDown(characterInputs.MouseButton(characterInputs.actionButton))
-            && !Input.GetMouseButton(characterInputs.MouseButton(characterInputs.aimButton))
+            && Input.GetKeyDown(_inputs.interactionKey)
             && !canvasObject.activeSelf
             && !openMainDoor.GetStatusDoor()
         )

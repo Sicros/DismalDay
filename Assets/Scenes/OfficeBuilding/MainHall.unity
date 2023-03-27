@@ -249,7 +249,6 @@ MonoBehaviour:
   _textDocument: {fileID: 248124059}
   timeBetweenInteractions: 5
   _gameOverObject: {fileID: 43525889}
-  _loadSceneController: {fileID: 880230486}
 --- !u!1001 &5538071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -462,7 +461,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10f3b85648f77c24b980116c189d598e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterInputs: {fileID: 880230483}
   openMainDoor: {fileID: 167828975}
   codeDoor: 649
   canvasObject: {fileID: 123773715}
@@ -3014,8 +3012,6 @@ MonoBehaviour:
   onInteraction:
     m_PersistentCalls:
       m_Calls: []
-  _characterInputs: {fileID: 880230483}
-  _loadSceneController: {fileID: 880230486}
   _inventoryController: {fileID: 730800960}
   sceneName: Snowfield
   idKey: 0
@@ -5056,8 +5052,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _characterInputs: {fileID: 880230483}
-  _loadSceneController: {fileID: 880230486}
   _inventoryController: {fileID: 730800960}
   sceneName: MainHall02
   idKey: 3
@@ -6587,7 +6581,6 @@ MonoBehaviour:
   firstPerson: {fileID: 1295802059}
   thirdPerson: {fileID: 1147683715}
   activeThirdPerson: 1
-  _inputs: {fileID: 880230483}
 --- !u!4 &1444334295
 Transform:
   m_ObjectHideFlags: 0
@@ -7658,7 +7651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3826b2b1e4f0e4a98745fc80e46910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneController: {fileID: 880230486}
   player: {fileID: 1498490227}
   sceneInfo: {fileID: 11400000, guid: 418707fa6f0f872498e5ca3329bbc161, type: 2}
 --- !u!1 &1809719229
@@ -7978,8 +7970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b56f95bd5bdee48b1eb4126221e256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterInputs: {fileID: 880230483}
-  textFile: {fileID: 4900000, guid: 3abbfed55f39ed842a1f9e4c28cc51b2, type: 3}
+  textFile: {fileID: 4900000, guid: 030e5bc998b12c741b453322bead71e0, type: 3}
   pathCanvasObject: /Setup/Canvas
   pathDocumentPanel: PanelDocuments
 --- !u!23 &1844170910

@@ -41,6 +41,9 @@ public class FirstPersonCamera : MonoBehaviour
 
         // Almacenamiento de la rotación inicial del personaje.
         _characterInitialRotation = character.transform.rotation;
+
+        // Aplicación rotación inicial personaje a componente.
+        transform.rotation = character.transform.rotation;
     }
 
     private void Update()

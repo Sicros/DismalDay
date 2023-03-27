@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             // "this" es una palabra clave que indica que se apunta a si mismo.
             // Es decir, hacia el mismo GameManager definido en este script.
             instance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(instance);
         }
     }
 }

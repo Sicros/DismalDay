@@ -10,9 +10,7 @@ public class OpenMainDoor : MonoBehaviour
 
     private bool isTriggerActive = false;
 
-    [SerializeField] private CharacterInputs _characterInputs;
-
-    [SerializeField] private LoadSceneController _loadSceneController;
+    private LoadSceneController _loadSceneController;
 
     [SerializeField] private InventoryController _inventoryController;
 
@@ -24,19 +22,19 @@ public class OpenMainDoor : MonoBehaviour
 
     [SerializeField] private string nameDoor;
 
-    private void Awake()
+    private CharacterInputs _inputs;
+
+    private void Start()
     {
+        GameManager.instance.TryGetComponent<LoadSceneController>(out _loadSceneController);
+        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
         onAction += _loadSceneController.LoadScene;
     }
 
     private void Update()
     {
         if
-        (
-            Input.GetMouseButtonDown(_characterInputs.MouseButton(_characterInputs.actionButton))
-            && !Input.GetMouseButton(_characterInputs.MouseButton(_characterInputs.aimButton))
-            && isTriggerActive
-        )
+        (Input.GetKeyDown(_inputs.interactionKey) && isTriggerActive)
         {
             if (isOpen)
             {

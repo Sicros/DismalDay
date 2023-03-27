@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ReadDocument : MonoBehaviour
 {
-    // Referencia a los inputs del personaje.
-    [SerializeField] private CharacterInputs characterInputs;
 
     [SerializeField] TextAsset textFile;
 
@@ -17,8 +15,12 @@ public class ReadDocument : MonoBehaviour
     
     private UIText _uiTextController;
 
-    private void Awake()
+    // Referencia a los inputs del personaje.
+    private CharacterInputs _inputs;
+
+    private void Start()
     {
+        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
         _textString = textFile.text;
         _canvasObject = GameObject.Find(pathCanvasObject);
         _canvasObject.TryGetComponent<UIText>(out _uiTextController);
@@ -30,11 +32,7 @@ public class ReadDocument : MonoBehaviour
     // objeto.
     private void OnTriggerStay(Collider other)
     {
-        if (
-            other.tag == "Player"
-            && Input.GetMouseButtonDown(characterInputs.MouseButton(characterInputs.actionButton))
-            && !Input.GetMouseButton(characterInputs.MouseButton(characterInputs.aimButton))
-        )
+        if (other.tag == "Player" && Input.GetKeyDown(_inputs.interactionKey))
         {
             if(_canvasObject.transform.Find(pathDocumentPanel).gameObject.activeSelf)
             {

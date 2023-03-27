@@ -324,7 +324,6 @@ MonoBehaviour:
   _textDocument: {fileID: 248124059}
   timeBetweenInteractions: 5
   _gameOverObject: {fileID: 1661035428}
-  _loadSceneController: {fileID: 880230486}
 --- !u!1001 &5538071
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8041,7 +8040,6 @@ MonoBehaviour:
   firstPerson: {fileID: 1295802059}
   thirdPerson: {fileID: 1147683715}
   activeThirdPerson: 1
-  _inputs: {fileID: 880230483}
 --- !u!4 &1444334295
 Transform:
   m_ObjectHideFlags: 0
@@ -9831,7 +9829,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3826b2b1e4f0e4a98745fc80e46910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneController: {fileID: 880230486}
   player: {fileID: 1498490227}
   sceneInfo: {fileID: 11400000, guid: 418707fa6f0f872498e5ca3329bbc161, type: 2}
 --- !u!1001 &1856042258
@@ -11430,6 +11427,26 @@ PrefabInstance:
       propertyPath: onInteraction.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5270582}
+    - target: {fileID: 8817174972610116903, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.116
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817174972610116905, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.0705302
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817174972610116905, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.42026508
+      objectReference: {fileID: 0}
+    - target: {fileID: 8817174972610116905, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
+        type: 3}
+      propertyPath: m_Center.y
+      value: -0.100000024
+      objectReference: {fileID: 0}
     - target: {fileID: 8817174974003924927, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
         type: 3}
       propertyPath: _characterInputs
