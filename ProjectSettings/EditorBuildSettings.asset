@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OfficeBuilding/MeetingRoom01.unity
     guid: d4c5b667bac5ddc4db55c49a58f26942
+  - enabled: 1
+    path: Assets/Scenes/OfficeBuilding/Office02.unity
+    guid: 4d1fb511cee28744fbc35ae7b4abb01c
+  - enabled: 1
+    path: Assets/Scenes/OfficeBuilding/MainHall02.unity
+    guid: 99ddf5c67a4e05e4ea4744147fc141ac
   m_configObjects: {}

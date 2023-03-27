@@ -96,7 +96,11 @@ public class InventoryController : MonoBehaviour
         {
             if (_characterData.inventoryCharacter[i, 0] == id)
             {
-                if (quantity <= _characterData.inventoryCharacter[i, 1])
+                if (!objectsList.itemLibrary[id].consumable)
+                {
+                    result = 1;
+                }
+                else if (quantity <= _characterData.inventoryCharacter[i, 1])
                 {
                     _characterData.inventoryCharacter[i, 1] -= quantity;
                     result = 0;

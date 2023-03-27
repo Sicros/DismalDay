@@ -30,6 +30,10 @@ public class UIText : MonoBehaviour
     // Tiempo de espera antes de borrar el mensaje impreso en el panel de interacciones.
     [SerializeField] private float timeBetweenInteractions;
 
+    [SerializeField] private GameObject _gameOverObject;
+
+    [SerializeField] private LoadSceneController _loadSceneController;
+
     // Próximo momento en que se eliminará el mensaje impreso.
     private float _timeToDeleteInteraction;
 
@@ -37,6 +41,7 @@ public class UIText : MonoBehaviour
     private void Awake()
     {
         UpdateInteractionObject("");
+        _gameOverObject.SetActive(false);
     }
 
     // Revisa que no exista ningún mensaje impreso pasado el tiempo definido.
@@ -45,6 +50,10 @@ public class UIText : MonoBehaviour
         if (_textInteraction.text != "" && _timeToDeleteInteraction <= Time.time)
         {
             _textInteraction.text = "";
+        }
+        if (_gameOverObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        {
+            _loadSceneController.LoadScene("MainMenu");
         }
     }
 
@@ -83,5 +92,10 @@ public class UIText : MonoBehaviour
     public void UpdateDocumenText(string textToPrint)
     {
         _textDocument.text = textToPrint;
+    }
+
+    public void GameOverScreen()
+    {
+        _gameOverObject.SetActive(true);
     }
 }

@@ -14,7 +14,7 @@ public class ObjectsList : MonoBehaviour
         itemLibrary.Add(
             0,
             new Item {
-                nameObject = "Medkit",
+                nameObject = "MedKit",
                 description = "Cura 5 puntos de vida",
                 healAmount = 5f,
                 maxQuantity = 3,
@@ -25,7 +25,7 @@ public class ObjectsList : MonoBehaviour
         itemLibrary.Add(
             1,
             new Item {
-                nameObject = "Balas pistola",
+                nameObject = "Balas Pistola",
                 description = "Munición para la pistola",
                 healAmount = 0f,
                 maxQuantity = 60,
@@ -35,12 +35,23 @@ public class ObjectsList : MonoBehaviour
         );
         itemLibrary.Add(
             2,
-                new Item {
-                nameObject = "LLave complejo de oficinas",
+            new Item {
+                nameObject = "Lave Complejo de Oficinas",
                 description = "Llave que permite abrir la puerta principal del complejo de oficinas",
                 healAmount = 0f,
                 maxQuantity = 1,
-                consumable = true,
+                consumable = false,
+                keyItem = true
+            }
+        );
+        itemLibrary.Add(
+            3,
+            new Item {
+                nameObject = "Llave Pasillo Principal 2",
+                description = "Llave que permite abrir la puerta que lleva hacía el segundo tramo del pasillo principal",
+                healAmount = 0f,
+                maxQuantity = 1,
+                consumable = false,
                 keyItem = true
             }
         );
