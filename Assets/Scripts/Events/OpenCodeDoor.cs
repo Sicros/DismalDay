@@ -9,11 +9,11 @@ public class OpenCodeDoor : MonoBehaviour
     [SerializeField] private GameObject canvasObject;
     
     // Referencia a los inputs del personaje.
-    private CharacterInputs _inputs;
+    private KeyInputsSetup _inputs;
 
     private void Start()
     {
-        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
         canvasObject.SetActive(false);
     }
 
@@ -29,7 +29,7 @@ public class OpenCodeDoor : MonoBehaviour
     {
         if (
             other.tag == "Player"
-            && Input.GetKeyDown(_inputs.interactionKey)
+            && Input.GetKeyDown(_inputs.GetInteractionKey())
             && !canvasObject.activeSelf
             && !openMainDoor.GetStatusDoor()
         )

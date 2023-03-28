@@ -738,7 +738,7 @@ PrefabInstance:
         type: 3}
       propertyPath: characterInputs
       value: 
-      objectReference: {fileID: 880230483}
+      objectReference: {fileID: 0}
     - target: {fileID: 4512602959633398988, guid: 8a271fde7aad44b5a8ec8025c447c359,
         type: 3}
       propertyPath: inventoryController
@@ -4972,8 +4972,8 @@ GameObject:
   m_Component:
   - component: {fileID: 880230482}
   - component: {fileID: 880230481}
-  - component: {fileID: 880230483}
   - component: {fileID: 880230486}
+  - component: {fileID: 880230487}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5006,27 +5006,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &880230483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880230480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5936b10da23311e48a5d8c8f16cb1c2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goUpKey: 119
-  goDownKey: 115
-  turnLeftKey: 97
-  turnRightKey: 100
-  runKey: 304
-  aimButton: 1
-  actionButton: 0
 --- !u!114 &880230486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5039,6 +5020,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d99147c47ffb8c468a31b4a3de1ae32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &880230487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880230480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e810e0243841744943685a91a7be68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyInputs: {fileID: 11400000, guid: 3353b540db912c340a2833fbf6391bd8, type: 2}
 --- !u!1001 &904746246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7068,7 +7062,7 @@ Transform:
   m_Children:
   - {fileID: 1443587317}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1189163301
 PrefabInstance:
@@ -8665,7 +8659,7 @@ Transform:
   - {fileID: 877746029}
   - {fileID: 341564363}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1628292051
 GameObject:
@@ -10706,7 +10700,7 @@ Transform:
   - {fileID: 1047553536}
   - {fileID: 1848957237}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1990031964
 GameObject:
@@ -11317,6 +11311,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1416065137}
     m_Modifications:
+    - target: {fileID: 2220843009427453262, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4380002103914998694, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
         type: 3}
       propertyPath: m_RootOrder
@@ -11381,7 +11380,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterInputs
       value: 
-      objectReference: {fileID: 880230483}
+      objectReference: {fileID: 0}
     - target: {fileID: 8817174972394912595, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
         type: 3}
       propertyPath: _inventoryController
@@ -11411,7 +11410,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterInputs
       value: 
-      objectReference: {fileID: 880230483}
+      objectReference: {fileID: 0}
     - target: {fileID: 8817174972610116902, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
         type: 3}
       propertyPath: _inventoryController
@@ -11451,7 +11450,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterInputs
       value: 
-      objectReference: {fileID: 880230483}
+      objectReference: {fileID: 0}
     - target: {fileID: 8817174974003924927, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
         type: 3}
       propertyPath: _inventoryController
@@ -11471,7 +11470,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _characterInputs
       value: 
-      objectReference: {fileID: 880230483}
+      objectReference: {fileID: 0}
     - target: {fileID: 8817174974242028668, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
         type: 3}
       propertyPath: _inventoryController
@@ -11511,7 +11510,7 @@ PrefabInstance:
     - target: {fileID: 1498490226, guid: a5f22621a9866a4488ef4828d99d06ed, type: 3}
       propertyPath: _inputs
       value: 
-      objectReference: {fileID: 880230483}
+      objectReference: {fileID: 0}
     - target: {fileID: 1498490226, guid: a5f22621a9866a4488ef4828d99d06ed, type: 3}
       propertyPath: characterCamera
       value: 
@@ -11761,7 +11760,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _inputs
       value: 
-      objectReference: {fileID: 880230483}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5f22621a9866a4488ef4828d99d06ed, type: 3}
 --- !u!114 &5844351007063920261 stripped

@@ -22,11 +22,11 @@ public class PickupItem : MonoBehaviour
     [SerializeField] private ObjectsList _objectList;
 
     // Referencia a los inputs del personaje.
-    private CharacterInputs _inputs;
+    private KeyInputsSetup _inputs;
 
     private void Start()
     {
-        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
     }
 
     // Al entrar en contacto con el objeto, este será recogido, siempre y cuando
@@ -34,7 +34,7 @@ public class PickupItem : MonoBehaviour
     // objeto.
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && Input.GetKeyDown(_inputs.interactionKey))
+        if (other.tag == "Player" && Input.GetKeyDown(_inputs.GetInteractionKey()))
         {
             pickupObject.Play();
             inventoryController.AddItem(id, quantity);

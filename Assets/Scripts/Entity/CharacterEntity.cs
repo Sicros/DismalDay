@@ -16,9 +16,13 @@ public class CharacterEntity : ObjectEntity
     // Evento C# relacionado al cambio de la vida actual del personaje, para eventos C#.
     public Action<float, float> onHealthChangeC;
 
+    // Velocidad actual del personaje.
+    private float _currentSpeed;
+
     // Obtención de componente de animación e iniciación de inventario del personaje.
     private void Start()
     {
+        _currentSpeed = characterData.speedWalkingUp;
         // Obtención del componente de animación al inicio del juego.
         transform.TryGetComponent<Animator>(out _animator);
         onHealthChangeC?.Invoke(characterData.currentHealth, characterData.maximumHealth);
@@ -87,9 +91,9 @@ public class CharacterEntity : ObjectEntity
 
     // Método para alterar la velocidad de movimiento del personaje. Se espera un valor de tipo float
     // el que es multiplicado por su velocidad actual y el resultado se asigna a esta misma.
-    public void ChangeSpeed(float multiplier)
+    public void ChangeSpeed(bool isWalking)
     {
-        characterData.speedWalkingUp *= multiplier;
+        _currentSpeed = isWalking ? characterData.speedWalkingUp : characterData.speedRunningUp;
     }
 
     // Retorna la vida actual del personaje.
@@ -108,6 +112,18 @@ public class CharacterEntity : ObjectEntity
     public float GetSpeedWalkingDown()
     {
         return characterData.speedWalkingDown;
+    }
+
+    // Retorna la velocidad con la que el personaje corre hacia delante.
+    public float GetSpeedRunningUp()
+    {
+        return characterData.speedRunningUp;
+    }
+
+    // Retorna la velocidad actual con la que se mueve el personaje.
+    public float GetCurrentSpeed()
+    {
+        return _currentSpeed;
     }
 
     // Retorna la velocidad de rotación del personaje.

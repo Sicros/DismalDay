@@ -1,21 +1,8 @@
 using UnityEngine;
 
-/*
-La finalidad de este scripts es unicamente almacenar los botones y teclas
-que permite realizar determinadas acciones con el personaje o el mismo ambiente.
-Cada una de estas variables son públicas para que puedan ser accedidas por otras
-clases.
-*/
+[CreateAssetMenu(menuName = "Setup/KeyInputs")]
 
-// Definido de variable que almacena cada botón asociado al mouse.
-public enum MouseKeys
-{
-    PrimaryKey,
-    SecondaryKey,
-    MiddleKey
-}
-
-public class CharacterInputs : MonoBehaviour
+public class KeyInputs : ScriptableObject
 {
     // Tecla que permite moverse hacia delante.
     public KeyCode goUpKey;

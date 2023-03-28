@@ -96,11 +96,7 @@ public class InventoryController : MonoBehaviour
         {
             if (_characterData.inventoryCharacter[i, 0] == id)
             {
-                if (!objectsList.itemLibrary[id].consumable)
-                {
-                    result = 1;
-                }
-                else if (quantity <= _characterData.inventoryCharacter[i, 1])
+                if (quantity <= _characterData.inventoryCharacter[i, 1])
                 {
                     _characterData.inventoryCharacter[i, 1] -= quantity;
                     result = 0;
@@ -112,7 +108,7 @@ public class InventoryController : MonoBehaviour
                 }
                 if (_characterData.inventoryCharacter[i, 1] == 0)
                 {
-                    for (int j = i; i < _characterData.inventoryCharacter.GetLength(0); j++)
+                    for (int j = i; j < _characterData.inventoryCharacter.GetLength(0); j++)
                     {
                         if (j == _characterData.inventoryCharacter.GetLength(0) - 1)
                         {

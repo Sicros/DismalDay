@@ -16,11 +16,11 @@ public class ReadDocument : MonoBehaviour
     private UIText _uiTextController;
 
     // Referencia a los inputs del personaje.
-    private CharacterInputs _inputs;
+    private KeyInputsSetup _inputs;
 
     private void Start()
     {
-        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
         _textString = textFile.text;
         _canvasObject = GameObject.Find(pathCanvasObject);
         _canvasObject.TryGetComponent<UIText>(out _uiTextController);
@@ -32,7 +32,7 @@ public class ReadDocument : MonoBehaviour
     // objeto.
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player" && Input.GetKeyDown(_inputs.interactionKey))
+        if (other.tag == "Player" && Input.GetKeyDown(_inputs.GetInteractionKey()))
         {
             if(_canvasObject.transform.Find(pathDocumentPanel).gameObject.activeSelf)
             {

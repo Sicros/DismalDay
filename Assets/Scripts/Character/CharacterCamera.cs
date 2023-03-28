@@ -21,14 +21,14 @@ public class CharacterCamera : MonoBehaviour
     [SerializeField] private bool activeThirdPerson;
 
     // Variable que almacena los inputs para mover o rotar al personaje.
-    private CharacterInputs _inputs;
+    private KeyInputsSetup _inputs;
 
     // Se fija la cámara inicial dependiendo del valor que se le asigne a activeThirdPerson.
     // Si está activo, se usará la cámara en tercera persona, de lo contrario será en
     // primera persona.
     void Start()
     {
-        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
         activeThirdPerson = ChangeCamera(activeThirdPerson, firstPerson, thirdPerson);
     }
 
@@ -37,12 +37,12 @@ public class CharacterCamera : MonoBehaviour
     // desde el inspector de Unity, y debe ser un botón del mouse.
     void Update()
     {
-        if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetMouseButtonDown(_inputs.GetAimButton()))
         {
             activeThirdPerson = ChangeCamera(activeThirdPerson, firstPerson, thirdPerson);
 
         }
-        if (Input.GetMouseButtonUp(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetMouseButtonUp(_inputs.GetAimButton()))
         {
             activeThirdPerson = ChangeCamera(activeThirdPerson, firstPerson, thirdPerson);
         }

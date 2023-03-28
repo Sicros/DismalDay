@@ -21,7 +21,7 @@ public class LaserPointer : MonoBehaviour
     [SerializeField] private GameObject shootSound;
     
     // Variable quue almacena los inputs del jugador.
-    private CharacterInputs _inputs;
+    private KeyInputsSetup _inputs;
 
     // Variable que almacena los atributos del personaje.
     private CharacterEntity _character;
@@ -51,7 +51,7 @@ public class LaserPointer : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
         
         // Inicialización del nombre del arma como vacío.
         _weaponName = "";
@@ -105,7 +105,7 @@ public class LaserPointer : MonoBehaviour
     // hasta su posición.
     private void Shooting()
     {
-        if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.actionButton)) && Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetMouseButtonDown(_inputs.GetActionButton()) && Input.GetMouseButton(_inputs.GetAimButton()))
         {
             onShoot?.Invoke();
             if (_weaponCanShoot)
@@ -145,11 +145,11 @@ public class LaserPointer : MonoBehaviour
     // es desactivado.
     private void ControlPointer()
     {
-        if (Input.GetMouseButtonDown(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetMouseButtonDown(_inputs.GetAimButton()))
         {
             _pointer.enabled = true;
         }
-        if (Input.GetMouseButtonUp(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetMouseButtonUp(_inputs.GetAimButton()))
         {
             _pointer.enabled = false;
         }

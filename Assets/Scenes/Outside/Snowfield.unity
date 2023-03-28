@@ -1262,7 +1262,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &280454886
 GameObject:
@@ -1549,7 +1549,7 @@ Transform:
   m_Children:
   - {fileID: 1379628681}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &351130589 stripped
 Transform:
@@ -3376,7 +3376,7 @@ Transform:
   - {fileID: 66441066}
   - {fileID: 217619939}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880230480
 GameObject:
@@ -3390,6 +3390,7 @@ GameObject:
   - component: {fileID: 880230481}
   - component: {fileID: 880230483}
   - component: {fileID: 880230485}
+  - component: {fileID: 880230486}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3422,7 +3423,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &880230483
 MonoBehaviour:
@@ -3440,7 +3441,8 @@ MonoBehaviour:
   goDownKey: 115
   turnLeftKey: 97
   turnRightKey: 100
-  runKey: 304
+  runKey: 32
+  interactionKey: 101
   aimButton: 1
   actionButton: 0
 --- !u!114 &880230485
@@ -3455,6 +3457,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d99147c47ffb8c468a31b4a3de1ae32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &880230486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880230480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e810e0243841744943685a91a7be68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyInputs: {fileID: 11400000, guid: 3353b540db912c340a2833fbf6391bd8, type: 2}
 --- !u!4 &886316716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4984444669274794, guid: 7c1543f51c5b8cc488fc53ab3cbffbb1,
@@ -4053,7 +4068,7 @@ Transform:
   - {fileID: 1785198344}
   - {fileID: 141894579}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1031419689
 PrefabInstance:
@@ -10691,7 +10706,7 @@ Transform:
   - {fileID: 1768391325}
   - {fileID: 2120615691}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1363223459 stripped
 Transform:
@@ -11114,7 +11129,7 @@ Transform:
   m_Children:
   - {fileID: 1622501987}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1444334293
 GameObject:

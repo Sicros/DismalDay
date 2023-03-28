@@ -872,7 +872,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startButton: {fileID: 394253552}
-  _loadSceneController: {fileID: 2031982655}
   sceneName: Snowfield
 --- !u!1 &511863429
 GameObject:
@@ -2923,9 +2922,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2031982659}
   - component: {fileID: 2031982658}
-  - component: {fileID: 2031982657}
   - component: {fileID: 2031982656}
   - component: {fileID: 2031982655}
+  - component: {fileID: 2031982660}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2957,25 +2956,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc1bc2ba83705e43b01ab1a9f76382a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2031982657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2031982654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5936b10da23311e48a5d8c8f16cb1c2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goUpKey: 119
-  goDownKey: 115
-  turnLeftKey: 97
-  turnRightKey: 100
-  runKey: 304
-  aimButton: 1
-  actionButton: 0
 --- !u!114 &2031982658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3003,6 +2983,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2031982660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031982654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e810e0243841744943685a91a7be68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyInputs: {fileID: 11400000, guid: 3353b540db912c340a2833fbf6391bd8, type: 2}
 --- !u!1 &2051727252
 GameObject:
   m_ObjectHideFlags: 0

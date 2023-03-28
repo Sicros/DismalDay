@@ -22,19 +22,19 @@ public class OpenMainDoor : MonoBehaviour
 
     [SerializeField] private string nameDoor;
 
-    private CharacterInputs _inputs;
+    private KeyInputsSetup _inputs;
 
     private void Start()
     {
         GameManager.instance.TryGetComponent<LoadSceneController>(out _loadSceneController);
-        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
         onAction += _loadSceneController.LoadScene;
     }
 
     private void Update()
     {
         if
-        (Input.GetKeyDown(_inputs.interactionKey) && isTriggerActive)
+        (Input.GetKeyDown(_inputs.GetInteractionKey()) && isTriggerActive)
         {
             if (isOpen)
             {

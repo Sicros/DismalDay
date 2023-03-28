@@ -11,7 +11,7 @@ como la velocidad de cada uno de estos movimientos, una método que permite corr
 public class CharacterController : MonoBehaviour
 {
     // Variable que almacena los inputs para mover o rotar al personaje.
-    [SerializeField] private CharacterInputs _inputs;
+    [SerializeField] private KeyInputsSetup _inputs;
 
     // Referencia a componente de animación del personaje.
     private Animator _animator;
@@ -24,7 +24,7 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.instance.TryGetComponent<CharacterInputs>(out _inputs);
+        GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
         transform.TryGetComponent<Animator>(out _animator);
         transform.TryGetComponent<CharacterEntity>(out _characterEntity);
     }
@@ -43,15 +43,15 @@ public class CharacterController : MonoBehaviour
     private void MoveCharacter()
     {
         // Comando para mover el personaje hacía delante.
-        if (Input.GetKey(_inputs.goUpKey) && !Input.GetKey(_inputs.goDownKey))
+        if (Input.GetKey(_inputs.GetGoUpKey()) && !Input.GetKey(_inputs.GetGoDownKey()))
         {
-            transform.Translate(0, 0, _characterEntity.GetSpeedWalkingUp() * Time.deltaTime);
+            transform.Translate(0, 0, _characterEntity.GetCurrentSpeed() * Time.deltaTime);
         }
 
         // Comando para mover el personaje hacía atrás.
-        if (!Input.GetKey(_inputs.goUpKey) && Input.GetKey(_inputs.goDownKey))
+        if (!Input.GetKey(_inputs.GetGoUpKey()) && Input.GetKey(_inputs.GetGoDownKey()))
         {
-            transform.Translate(0, 0, -_characterEntity.GetSpeedWalkingDown() * Time.deltaTime);
+            transform.Translate(0, 0, -_characterEntity.GetCurrentSpeed() * Time.deltaTime);
         }
     }
 
@@ -59,21 +59,21 @@ public class CharacterController : MonoBehaviour
     private void RotateCharacter()
     {
         // Rotar personaje hacia la izquierda.
-        if (Input.GetKey(_inputs.turnLeftKey) && !Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetKey(_inputs.GetTurnLeftKey()) && !Input.GetMouseButton(_inputs.GetAimButton()))
         {
             transform.Rotate(0, -_characterEntity.GetRotationSpeed() * Time.deltaTime, 0);
             characterCamera.firstPerson.transform.Rotate(0, -_characterEntity.GetRotationSpeed() * Time.deltaTime, 0);
         }
 
         // Rotar personaje hacia la derecha.
-        if (Input.GetKey(_inputs.turnRightKey) && !Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetKey(_inputs.GetTurnRightKey()) && !Input.GetMouseButton(_inputs.GetAimButton()))
         {
             transform.Rotate(0, _characterEntity.GetRotationSpeed() * Time.deltaTime, 0);
             characterCamera.firstPerson.transform.Rotate(0, _characterEntity.GetRotationSpeed() * Time.deltaTime, 0);
         }
 
         // Smoothly 180° rotation
-        if (Input.GetKey(_inputs.goDownKey) && Input.GetKeyDown(_inputs.runKey) && !Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetKey(_inputs.GetGoDownKey()) && Input.GetKeyDown(_inputs.GetRunKey()) && !Input.GetMouseButton(_inputs.GetAimButton()))
         {
             StartCoroutine(SmoothlyRotate(180));
         }
@@ -97,18 +97,18 @@ public class CharacterController : MonoBehaviour
 
     private void RunCharacter()
     {
-        if (!Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
+        if (!Input.GetMouseButton(_inputs.GetAimButton()))
         {
             // Duplicar velocidad de movimiento.
-            if (Input.GetKeyDown(_inputs.runKey))
+            if (Input.GetKeyDown(_inputs.GetRunKey()))
             {
-                _characterEntity.ChangeSpeed(2f);
+                _characterEntity.ChangeSpeed(false);
             }
 
             // Volver a velocidad original.
-            if (Input.GetKeyUp(_inputs.runKey))
+            if (Input.GetKeyUp(_inputs.GetRunKey()))
             {
-                _characterEntity.ChangeSpeed(0.5f);
+                _characterEntity.ChangeSpeed(true);
             }
         }
     }
@@ -116,37 +116,37 @@ public class CharacterController : MonoBehaviour
     private void AnimationCharacter()
     {
         // Animación para que personaje corra hacía delante.
-        if (Input.GetKeyDown(_inputs.runKey) && !Input.GetMouseButton(_inputs.MouseButton(_inputs.aimButton)))
+        if (Input.GetKeyDown(_inputs.GetRunKey()) && !Input.GetMouseButton(_inputs.GetAimButton()))
         {
             RunningTransition(true);
         }
 
         // Desactivar animación de correr.
-        if (!Input.GetKey(_inputs.runKey))
+        if (!Input.GetKey(_inputs.GetRunKey()))
         {
             RunningTransition(false);
         }
 
         // Animación para que personaje camine hacía delante.
-        if (Input.GetKey(_inputs.goUpKey))
+        if (Input.GetKey(_inputs.GetGoUpKey()))
         {
             WalkingTransition(true);
         }
 
         // Desactivar animación de caminar hacía delante.
-        if (!Input.GetKey(_inputs.goUpKey) || Input.GetKeyUp(_inputs.goUpKey))
+        if (!Input.GetKey(_inputs.GetGoUpKey()) || Input.GetKeyUp(_inputs.GetGoUpKey()))
         {
             WalkingTransition(false);
         }
 
         // Animación para que personaje camine hacía atras.
-        if (Input.GetKey(_inputs.goDownKey))
+        if (Input.GetKey(_inputs.GetGoDownKey()))
         {
             WalkingBackTransition(true);
         }
 
         // Desactivar animación de caminar hacía atras.
-        if (!Input.GetKey(_inputs.goDownKey) || Input.GetKeyUp(_inputs.goDownKey))
+        if (!Input.GetKey(_inputs.GetGoDownKey()) || Input.GetKeyUp(_inputs.GetGoDownKey()))
         {
             WalkingBackTransition(false);
         }
