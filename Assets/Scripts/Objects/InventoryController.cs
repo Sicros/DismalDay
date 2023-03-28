@@ -50,9 +50,9 @@ public class InventoryController : MonoBehaviour
     // en caso de que ya se tuvieran anteriormente. Se ocupa el primer espacio del
     // inventario que se encuentre vacío en caso de ser un objeto que no se poseía
     // con anterioridad.
-    public void AddItem(int id, int quantity)
+    public int AddItem(int id, int quantity)
     {
-        int result = -1;
+        int result = 0;
         for (int i = 0; i < _characterData.inventoryCharacter.GetLength(0); i++)
         {
             if (_characterData.inventoryCharacter[i, 0] == id)
@@ -60,11 +60,11 @@ public class InventoryController : MonoBehaviour
                 if (quantity + _characterData.inventoryCharacter[i, 1] <= objectsList.itemLibrary[id].maxQuantity)
                 {
                     _characterData.inventoryCharacter[i, 1] += quantity;
-                    result = 0;
+                    result = quantity;
                 }
-                else
+                else if (_characterData.inventoryCharacter[i, 1] < objectsList.itemLibrary[id].maxQuantity)
                 {
-                    result = quantity + _characterData.inventoryCharacter[i, 1] - objectsList.itemLibrary[id].maxQuantity;
+                    result = objectsList.itemLibrary[id].maxQuantity - _characterData.inventoryCharacter[i, 1];
                     _characterData.inventoryCharacter[i, 1] = objectsList.itemLibrary[id].maxQuantity;
                 }
                 break;
@@ -73,16 +73,17 @@ public class InventoryController : MonoBehaviour
             {
                 _characterData.inventoryCharacter[i, 0] = id;
                 _characterData.inventoryCharacter[i, 1] = quantity;
-                result = 0;
+                result = quantity;
                 break;
             }
         }
-        if (id == 1 && result != -1)
+        if (id == 1 && result != 0)
         {    
             onBulletInventoryChangeUE?.Invoke(GetQuantityObject(1));
             onBulletInventoryChange?.Invoke(GetQuantityObject(1));
+            Debug.Log("Bullets after add: " + GetQuantityObject(1));
         }
-        Debug.Log("Bullets after add: " + GetQuantityObject(1));
+        return result;
     }
 
     // Método que permite quitar un objeto del inventario. Se resta la cantidad que se posea.

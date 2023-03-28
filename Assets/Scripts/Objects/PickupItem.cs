@@ -36,10 +36,17 @@ public class PickupItem : MonoBehaviour
     {
         if (other.tag == "Player" && Input.GetKeyDown(_inputs.GetInteractionKey()))
         {
-            pickupObject.Play();
-            inventoryController.AddItem(id, quantity);
-            uiText.UpdateInteractionObject("Obtuviste " + _objectList.itemLibrary[id].nameObject + " (" + quantity + ")");
-            Destroy(gameObject);
+            int result = inventoryController.AddItem(id, quantity);
+            if (result == 0)
+            {
+                uiText.UpdateInteractionObject("Ya tienes el máximo de este objeto o el inventario está lleno");
+            }
+            else
+            {
+                pickupObject.Play();
+                uiText.UpdateInteractionObject("Obtuviste " + _objectList.itemLibrary[id].nameObject + " (" + result + ")");
+                Destroy(gameObject);
+            }
         }
     }
 }
