@@ -14705,10 +14705,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _inventoryController: {fileID: 2020319141}
-  sceneName: MainHall
-  idKey: 2
-  isOpen: 0
-  nameDoor: Complejo de Oficinas
+  _doorObject: {fileID: 11400000, guid: da14668208ed76a43a50f731948faef4, type: 2}
 --- !u!1001 &5844351007063920259
 PrefabInstance:
   m_ObjectHideFlags: 0

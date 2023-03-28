@@ -3013,10 +3013,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _inventoryController: {fileID: 730800960}
-  sceneName: Snowfield
-  idKey: 0
-  isOpen: 1
-  nameDoor: Campo Nevado
+  _doorObject: {fileID: 0}
 --- !u!65 &727954300
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5047,10 +5044,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _inventoryController: {fileID: 730800960}
-  sceneName: MainHall02
-  idKey: 3
-  isOpen: 0
-  nameDoor: "Sal\xF3n Principal 2"
+  _doorObject: {fileID: 11400000, guid: f5c70bc11ab03e14ca015553e116c493, type: 2}
 --- !u!1 &1127804350
 GameObject:
   m_ObjectHideFlags: 0
@@ -9701,6 +9695,11 @@ PrefabInstance:
       value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 594330797, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
+      propertyPath: _doorObject
+      value: 
+      objectReference: {fileID: 11400000, guid: c07b20a60bc8caa41aec266a8a0a9ae0,
+        type: 2}
+    - target: {fileID: 594330797, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
       propertyPath: _characterInputs
       value: 
       objectReference: {fileID: 0}
@@ -9729,6 +9728,11 @@ PrefabInstance:
       value: Office02
       objectReference: {fileID: 0}
     - target: {fileID: 850655086, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
+      propertyPath: _doorObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 81008cf959a8ad44c918b8d01116471b,
+        type: 2}
+    - target: {fileID: 850655086, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
       propertyPath: _characterInputs
       value: 
       objectReference: {fileID: 0}
@@ -9753,6 +9757,11 @@ PrefabInstance:
       value: MeetingRoom01
       objectReference: {fileID: 0}
     - target: {fileID: 1101514231, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
+      propertyPath: _doorObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 5ee78219e7dd3744aa9ae9bcbd9cc7c8,
+        type: 2}
+    - target: {fileID: 1101514231, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
       propertyPath: _characterInputs
       value: 
       objectReference: {fileID: 0}
@@ -9772,6 +9781,11 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1565787010, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
+      propertyPath: _doorObject
+      value: 
+      objectReference: {fileID: 11400000, guid: b3f7188c6d6815b4fad514b9a3d09045,
+        type: 2}
     - target: {fileID: 1565787010, guid: f92f2d91e59b73d428fe3db7822d66f5, type: 3}
       propertyPath: _characterInputs
       value: 

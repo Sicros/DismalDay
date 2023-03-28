@@ -36,7 +36,7 @@ public class ObjectsList : MonoBehaviour
         itemLibrary.Add(
             2,
             new Item {
-                nameObject = "Lave Complejo de Oficinas",
+                nameObject = "Llave Complejo de Oficinas",
                 description = "Llave que permite abrir la puerta principal del complejo de oficinas",
                 healAmount = 0f,
                 maxQuantity = 1,

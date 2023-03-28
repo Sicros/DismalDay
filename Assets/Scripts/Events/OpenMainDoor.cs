@@ -14,13 +14,7 @@ public class OpenMainDoor : MonoBehaviour
 
     [SerializeField] private InventoryController _inventoryController;
 
-    [SerializeField] private string sceneName;
-
-    [SerializeField] private int idKey;
-
-    [SerializeField] private bool isOpen;
-
-    [SerializeField] private string nameDoor;
+    [SerializeField] private DoorObject _doorObject;
 
     private KeyInputsSetup _inputs;
 
@@ -36,18 +30,18 @@ public class OpenMainDoor : MonoBehaviour
         if
         (Input.GetKeyDown(_inputs.GetInteractionKey()) && isTriggerActive)
         {
-            if (isOpen)
+            if (_doorObject.isOpen)
             {
-                onAction?.Invoke(sceneName);
+                onAction?.Invoke(_doorObject.sceneName);
             }
-            else if (_inventoryController.GetQuantityObject(idKey) > 0)
+            else if (_inventoryController.GetQuantityObject(_doorObject.keyId) > 0)
             {
-                onInteraction?.Invoke("La puerta " + nameDoor + " ha sido abierta");
-                isOpen = true;
+                onInteraction?.Invoke("La puerta " + _doorObject.doorName + " ha sido abierta");
+                _doorObject.isOpen = true;
             }
             else
             {
-                onInteraction?.Invoke("La puerta " + nameDoor + " está cerrada");
+                onInteraction?.Invoke("La puerta " + _doorObject.doorName + " está cerrada");
             }
         }
     }
@@ -70,21 +64,21 @@ public class OpenMainDoor : MonoBehaviour
 
     public void OpenDoor()
     {
-        isOpen = true;
+        _doorObject.isOpen = true;
     }
 
     public void TextDoorOpen()
     {
-        onInteraction?.Invoke("La puerta " + nameDoor + " ha sido abierta");
+        onInteraction?.Invoke("La puerta " + _doorObject.doorName + " ha sido abierta");
     }
 
     public void TextDoorClosed()
     {
-        onInteraction?.Invoke("La puerta " + nameDoor + " está cerrada");
+        onInteraction?.Invoke("La puerta " + _doorObject.doorName + " está cerrada");
     }
 
     public bool GetStatusDoor()
     {
-        return isOpen;
+        return _doorObject.isOpen;
     }
 }
