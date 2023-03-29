@@ -17,11 +17,6 @@ public class OpenCodeDoor : MonoBehaviour
         canvasObject.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Entró: " + other.name);
-    }
-
     // Al entrar en contacto con el objeto, este será recogido, siempre y cuando
     // el personaje tenga espacio en su inventario o no lleve la cantidad máxima del
     // objeto.
@@ -40,15 +35,6 @@ public class OpenCodeDoor : MonoBehaviour
             canvasObject.activeSelf
             && Input.GetKeyDown(KeyCode.Escape)
         )
-        {
-            canvasObject.SetActive(false);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Salió: " + other.name);
-        if (other.tag == "Player")
         {
             canvasObject.SetActive(false);
         }

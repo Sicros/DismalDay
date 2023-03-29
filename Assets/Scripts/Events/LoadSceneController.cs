@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public class LoadSceneController : MonoBehaviour
 {
-    public List<CharacterPositions> listCharacterPositions = new List<CharacterPositions> ();
+    public List<CharacterPositions> listCharacterPositions;
 
     private void Awake()
     {
+        listCharacterPositions = new List<CharacterPositions> ();
         listCharacterPositions.Add(new CharacterPositions("", "Snowfield", new Vector3 (0f, 0.0001f, -70f), Quaternion.Euler(0f, 0f, 0f)));
         listCharacterPositions.Add(new CharacterPositions("", "MainHall", new Vector3 (19f, 0.2f, 20f), Quaternion.Euler(0f, 0f, 0f)));
         listCharacterPositions.Add(new CharacterPositions("", "MeetingRoom01", new Vector3 (13.5f, 0.2f, 70f), Quaternion.Euler(0f, -145f, 0f)));
@@ -20,6 +21,8 @@ public class LoadSceneController : MonoBehaviour
         listCharacterPositions.Add(new CharacterPositions("MainHall", "MainHall02", new Vector3 (19f, 0.2f, 102f), Quaternion.Euler(0f, 0f, 0f)));
         listCharacterPositions.Add(new CharacterPositions("MeetingRoom01", "MainHall", new Vector3 (17f, 0.2f, 70f), Quaternion.Euler(0f, 0f, 0f)));
         listCharacterPositions.Add(new CharacterPositions("Office02", "MainHall", new Vector3 (21f, 0.2f, 74f), Quaternion.Euler(0f, 0f, 0f)));
+        // Comienza desde la carpeta "Assets"
+        // Debug.Log(Application.dataPath);
     }
 
     public void LoadScene(string sceneName)

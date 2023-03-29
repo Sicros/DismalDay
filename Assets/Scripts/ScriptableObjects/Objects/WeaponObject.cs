@@ -13,6 +13,9 @@ public class WeaponObject : ScriptableObject
     // Cantidad máxima de balas que puede llevar por carga.
     public int maxBullets;
 
-    // Time to reload wepon
+    // Tiempo para recargar arma.
     public float reloadTime;
+
+    // Cantidad de balas actuales cargadas.
+    public int currentBullets;
 }

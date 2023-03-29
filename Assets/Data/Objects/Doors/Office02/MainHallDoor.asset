@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 020579724d42cad40895e62c0ff1473d, type: 3}
-  m_Name: MainHallOffice01Door
+  m_Name: MainHallDoor
   m_EditorClassIdentifier: 
-  id: 4
-  doorName: Oficina 1
-  sceneName: Office01
-  isOpen: 0
+  id: 9
+  doorName: Pasillo Principal
+  sceneName: MainHall
+  isOpen: 1
   keyId: 999

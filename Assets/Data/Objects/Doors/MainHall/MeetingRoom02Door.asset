@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 020579724d42cad40895e62c0ff1473d, type: 3}
-  m_Name: SnowfieldMainHallDoor
+  m_Name: MeetingRoom02Door
   m_EditorClassIdentifier: 
-  id: 1
-  doorName: Complejo de Oficinas
-  sceneName: MainHall
+  id: 3
+  doorName: Sala de Reuniones 2
+  sceneName: MeetingRoom02
   isOpen: 0
-  keyId: 1
+  keyId: 999

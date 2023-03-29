@@ -20,9 +20,6 @@ public class WeaponAttributes : MonoBehaviour
     
     // Referencia al audio que se escucha al disparar un arma sin munición.
     [SerializeField] private AudioSource EmptyShootAudio;
-
-    // Cantidad de balas que tiene cargada el arma actualmente.
-    private int _currentBullets;
     
     // Próximo momento en que el arma puede volver a ser disparada.
     private float _timeNextShoot;
@@ -44,22 +41,19 @@ public class WeaponAttributes : MonoBehaviour
 
     private void Awake()
     {
+    }
+
+    private void Start()
+    {
         // Agrega como suscriptor el método HasBulletsInInventoryHandler al evento onBulletInventoryChange.
         // de la clase CharacterEntity
         _inventoryController.onBulletInventoryChange += HasBulletsInInventoryHandler;
 
         // Agrega como suscriptor el método ShootWeapon al evento onShoot de la clase LaserPointer.
         _laserPointer.onShoot += ShootWeapon;
-
-        // Se asigna la munición máxima a la cantidad actual del arma.
-        _currentBullets = _weaponObject.maxBullets;
-    }
-
-    private void Start()
-    {
         // Invoca los eventos definidos en esta clase para inicializar las variables de otras.
-        onBulletShot?.Invoke(_currentBullets, 0);
-        onBulletChange?.Invoke(_currentBullets, _weaponObject.maxBullets);
+        onBulletShot?.Invoke(_weaponObject.currentBullets, 0);
+        onBulletChange?.Invoke(_weaponObject.currentBullets, _weaponObject.maxBullets);
     }
 
     // Método invocado por la clase de LaserPointer a través del evento onShoot.
@@ -69,20 +63,20 @@ public class WeaponAttributes : MonoBehaviour
     public void ShootWeapon()
     {
         Debug.Log(_currentInventoryBullets);
-        onBulletShot?.Invoke(_currentBullets, _timeNextShoot);
+        onBulletShot?.Invoke(_weaponObject.currentBullets, _timeNextShoot);
         if (_timeNextShoot < Time.time)
         {
-            if (_currentBullets > 0)
+            if (_weaponObject.currentBullets > 0)
             {
-                _currentBullets--;
+                _weaponObject.currentBullets--;
                 ShootAudio.Play();
-                onBulletChange?.Invoke(_currentBullets, _weaponObject.maxBullets);
+                onBulletChange?.Invoke(_weaponObject.currentBullets, _weaponObject.maxBullets);
                 _timeNextShoot = Time.time + _weaponObject.timeBetweenShoots;
             }
             else if (_currentInventoryBullets > 0)
             {
                 ReloadWeapon();
-                onBulletChange?.Invoke(_currentBullets, _weaponObject.maxBullets);
+                onBulletChange?.Invoke(_weaponObject.currentBullets, _weaponObject.maxBullets);
             }
             else
             {
@@ -99,11 +93,11 @@ public class WeaponAttributes : MonoBehaviour
         _timeNextShoot = Time.time + _weaponObject.reloadTime;
         if (_currentInventoryBullets >= _weaponObject.maxBullets)
         {
-            _currentBullets = _weaponObject.maxBullets;
+            _weaponObject.currentBullets = _weaponObject.maxBullets;
         }
         else
         {
-            _currentBullets = _currentInventoryBullets;
+            _weaponObject.currentBullets = _currentInventoryBullets;
         }
         onBulletReload?.Invoke(1, _weaponObject.maxBullets);
     }

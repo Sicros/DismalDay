@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 709ff79c747bae147be5cadf52fb732a, type: 3}
-  m_Name: HandgunWeapon
+  m_Script: {fileID: 11500000, guid: 020579724d42cad40895e62c0ff1473d, type: 3}
+  m_Name: MainHallDoor
   m_EditorClassIdentifier: 
-  damage: 2
-  timeBetweenShoots: 1
-  maxBullets: 15
-  reloadTime: 2
-  currentBullets: 15
+  id: 1
+  doorName: Complejo de Oficinas
+  sceneName: MainHall
+  isOpen: 0
+  keyId: 2

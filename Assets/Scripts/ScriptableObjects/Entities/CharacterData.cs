@@ -14,19 +14,11 @@ public class CharacterData : ObjectEntityData
 
     public float speedRunningDown;
 
+    public int maxInventoryCapacity;
+
     // Arreglo que simula el inventario del personaje.
-    // Solo tiene espacio para llevar 10 objetos diferentes. A partir de ahí,
+    // Solo tiene espacio para llevar 8 objetos diferentes. A partir de ahí,
     // la cantidad máxima de cada uno se obtiene de la biblioteca de objeto.
-    public int[,] inventoryCharacter = new int[10, 2] {
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-        {-1, 0},
-    };
+    // public int[,] inventoryCharacter;
+    public List<InventoryCharacter> inventoryCharacter;
 }

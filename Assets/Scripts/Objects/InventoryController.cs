@@ -28,7 +28,6 @@ public class InventoryController : MonoBehaviour
     // Obtiene el componente de la biblioteca de objetos y hace las primeras invocaciones de eventos.
     private void Start()
     {
-        // gameObject.TryGetComponent<ObjectsList>(out objectsList);
         onBulletInventoryChange?.Invoke(GetQuantityObject(1));
         onBulletInventoryChangeUE?.Invoke(GetQuantityObject(1));
     }
@@ -36,11 +35,11 @@ public class InventoryController : MonoBehaviour
     // Método que permite obtener la cantidad de elementos que posee de un objeto en específico.
     public int GetQuantityObject(int id)
     {
-        for (int i = 0; i < _characterData.inventoryCharacter.GetLength(0); i++)
+        for (int i = 0; i < _characterData.inventoryCharacter.Count; i++)
         {
-            if (_characterData.inventoryCharacter[i, 0] == id)
+            if (_characterData.inventoryCharacter[i].id == id)
             {
-                return _characterData.inventoryCharacter[i, 1];
+                return _characterData.inventoryCharacter[i].quantity;
             }
         }
         return 0;
@@ -53,26 +52,30 @@ public class InventoryController : MonoBehaviour
     public int AddItem(int id, int quantity)
     {
         int result = 0;
-        for (int i = 0; i < _characterData.inventoryCharacter.GetLength(0); i++)
+        for (int i = 0; i < _characterData.inventoryCharacter.Count; i++)
         {
-            if (_characterData.inventoryCharacter[i, 0] == id)
+            if (_characterData.inventoryCharacter[i].id == id)
             {
-                if (quantity + _characterData.inventoryCharacter[i, 1] <= objectsList.itemLibrary[id].maxQuantity)
+                if (quantity + _characterData.inventoryCharacter[i].quantity <= objectsList.itemLibrary[id].maxQuantity)
                 {
-                    _characterData.inventoryCharacter[i, 1] += quantity;
+                    // _characterData.inventoryCharacter[i, 1] += quantity;
+                    int newQuantity = _characterData.inventoryCharacter[i].quantity + quantity;
+                    _characterData.inventoryCharacter[i] = new InventoryCharacter(id, newQuantity);
                     result = quantity;
                 }
-                else if (_characterData.inventoryCharacter[i, 1] < objectsList.itemLibrary[id].maxQuantity)
+                else if (_characterData.inventoryCharacter[i].quantity < objectsList.itemLibrary[id].maxQuantity)
                 {
-                    result = objectsList.itemLibrary[id].maxQuantity - _characterData.inventoryCharacter[i, 1];
-                    _characterData.inventoryCharacter[i, 1] = objectsList.itemLibrary[id].maxQuantity;
+                    result = objectsList.itemLibrary[id].maxQuantity - _characterData.inventoryCharacter[i].quantity;
+                    // _characterData.inventoryCharacter[i, 1] = objectsList.itemLibrary[id].maxQuantity;
+                    _characterData.inventoryCharacter[i] = new InventoryCharacter(id, objectsList.itemLibrary[id].maxQuantity);
                 }
                 break;
             }
-            if (_characterData.inventoryCharacter[i, 0] == -1)
+            if (_characterData.inventoryCharacter[i].id == -1)
             {
-                _characterData.inventoryCharacter[i, 0] = id;
-                _characterData.inventoryCharacter[i, 1] = quantity;
+                _characterData.inventoryCharacter[i] = new InventoryCharacter(id, quantity);
+                // _characterData.inventoryCharacter[i, 0] = id;
+                // _characterData.inventoryCharacter[i, 1] = quantity;
                 result = quantity;
                 break;
             }
@@ -93,39 +96,44 @@ public class InventoryController : MonoBehaviour
     public void SubstractItem(int id, int quantity)
     {
         int result = -1;
-        for (int i = 0; i < _characterData.inventoryCharacter.GetLength(0); i++)
+        for (int i = 0; i < _characterData.inventoryCharacter.Count; i++)
         {
-            if (_characterData.inventoryCharacter[i, 0] == id)
+            if (_characterData.inventoryCharacter[i].id == id)
             {
-                if (quantity <= _characterData.inventoryCharacter[i, 1])
+                if (quantity <= _characterData.inventoryCharacter[i].quantity)
                 {
-                    _characterData.inventoryCharacter[i, 1] -= quantity;
+                    int newQuantity = _characterData.inventoryCharacter[i].quantity - quantity;
+                    // _characterData.inventoryCharacter[i, 1] -= quantity;
+                    _characterData.inventoryCharacter[i] = new InventoryCharacter(id, newQuantity);
                     result = 0;
                 }
                 else
                 {
-                    result = quantity - _characterData.inventoryCharacter[i, 1];
-                    _characterData.inventoryCharacter[i, 1] = 0;
+                    result = quantity - _characterData.inventoryCharacter[i].quantity;
+                    // _characterData.inventoryCharacter[i, 1] = 0;
+                    _characterData.inventoryCharacter[i] = new InventoryCharacter(id, 0);
                 }
-                if (_characterData.inventoryCharacter[i, 1] == 0)
+                if (_characterData.inventoryCharacter[i].quantity == 0)
                 {
-                    for (int j = i; j < _characterData.inventoryCharacter.GetLength(0); j++)
+                    for (int j = i; j < _characterData.inventoryCharacter.Count; j++)
                     {
-                        if (j == _characterData.inventoryCharacter.GetLength(0) - 1)
+                        if (j == _characterData.inventoryCharacter.Count - 1)
                         {
-                            _characterData.inventoryCharacter[j, 0] = -1;
-                            _characterData.inventoryCharacter[j, 1] = 0;
+                            _characterData.inventoryCharacter[j] = new InventoryCharacter(-1, 0);
+                            // _characterData.inventoryCharacter[j, 0] = -1;
+                            // _characterData.inventoryCharacter[j, 1] = 0;
                         }
                         else
                         {
-                            _characterData.inventoryCharacter[j, 0] = _characterData.inventoryCharacter[j + 1, 0];
-                            _characterData.inventoryCharacter[j, 1] = _characterData.inventoryCharacter[j + 1, 1];                            
+                            _characterData.inventoryCharacter[j] = _characterData.inventoryCharacter[j + 1];
+                            // _characterData.inventoryCharacter[j, 0] = _characterData.inventoryCharacter[j + 1, 0];
+                            // _characterData.inventoryCharacter[j, 1] = _characterData.inventoryCharacter[j + 1, 1];                            
                         }
                     }
                 }
                 break;
             }
-            if (_characterData.inventoryCharacter[i, 0] == -1)
+            if (_characterData.inventoryCharacter[i].id == -1)
             {
                 break;
             }
