@@ -26,7 +26,7 @@ public class CanvasController : MonoBehaviour
         _startButton.onClick.AddListener(StartGame);
     }
 
-    // MNétodo que inicia el nuevo juego. Se encarga de cargar la nueva escena.
+    // Método que inicia el nuevo juego. Se encarga de cargar la nueva escena.
     private void StartGame()
     {
         SaveAndLoad.instance.LoadDataJSON("/Saves/StartingSave.json");

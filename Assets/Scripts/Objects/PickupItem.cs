@@ -45,6 +45,7 @@ public class PickupItem : MonoBehaviour
             {
                 pickupObject.Play();
                 uiText.UpdateInteractionObject("Obtuviste " + _objectList.itemLibrary[id].nameObject + " (" + result + ")");
+                SaveAndLoad.instance.AddObjectToDestroy(gameObject);
                 Destroy(gameObject);
             }
         }

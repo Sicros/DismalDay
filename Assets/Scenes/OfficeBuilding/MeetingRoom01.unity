@@ -11465,6 +11465,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8817174972610116902, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
         type: 3}
+      propertyPath: _doorObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 54c1957810707d248b239340484f44c5,
+        type: 2}
+    - target: {fileID: 8817174972610116902, guid: b8c7eb09f4328ea4c9e9e38a066a48c5,
+        type: 3}
       propertyPath: _characterInputs
       value: 
       objectReference: {fileID: 0}

@@ -1463,6 +1463,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1443587317}
     m_Modifications:
+    - target: {fileID: 1622501994, guid: 8a271fde7aad44b5a8ec8025c447c359, type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4512602959633398988, guid: 8a271fde7aad44b5a8ec8025c447c359,
         type: 3}
       propertyPath: uiText
@@ -1473,11 +1477,6 @@ PrefabInstance:
       propertyPath: _objectList
       value: 
       objectReference: {fileID: 1994673432}
-    - target: {fileID: 4512602959633398988, guid: 8a271fde7aad44b5a8ec8025c447c359,
-        type: 3}
-      propertyPath: characterInputs
-      value: 
-      objectReference: {fileID: 880230483}
     - target: {fileID: 4512602959633398988, guid: 8a271fde7aad44b5a8ec8025c447c359,
         type: 3}
       propertyPath: inventoryController
@@ -1542,6 +1541,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AmmoBox01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7815940762119639545, guid: 8a271fde7aad44b5a8ec8025c447c359,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a271fde7aad44b5a8ec8025c447c359, type: 3}

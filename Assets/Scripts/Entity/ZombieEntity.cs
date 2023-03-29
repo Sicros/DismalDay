@@ -45,6 +45,9 @@ public class ZombieEntity : ObjectEntity
             // Cambia la etiqueta del zombie.
             gameObject.tag = "EnemyDeath";
 
+            // Agrega zombie muerto a la lista.
+            SaveAndLoad.instance.AddObjectToDestroy(gameObject);
+
             // Destruye el objeto transcurrido el tiempo dado por el usuario.
             Destroy(gameObject, zombieData.timeToDestroy);
         }

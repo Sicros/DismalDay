@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public struct SaveData
@@ -9,7 +10,7 @@ public struct SaveData
     public float currentHealthCharacter;
     public int currentHandgunBullets;
     public List<OpenDoor> openDoors;
-    public Dictionary<string, List<string>> zombiesToDestroy;
+    public List<ObjectsPerScene> objectsToDestroy;
     public Dictionary<string, List<string>> itemsToDestroy;
     public List<InventoryCharacter> inventoryCharacter;
 }
@@ -37,6 +38,19 @@ public struct InventoryCharacter
     {
         id = idItem;
         quantity = quantityItem;
+    }
+}
+
+[Serializable]
+public struct ObjectsPerScene
+{
+    public string sceneName;
+    public List<string> gameObjectNames;
+
+    public ObjectsPerScene(string scene, List<string> zombies)
+    {
+        sceneName = scene;
+        gameObjectNames = zombies;
     }
 }
 
@@ -74,6 +88,7 @@ public class SaveAndLoad : MonoBehaviour
         characterData.inventoryCharacter = _tempSave.inventoryCharacter;
         weaponData.currentBullets = _tempSave.currentHandgunBullets;
         ReplaceDoorsStatus();
+        DestroyObjectsFromList();
         Debug.Log("Data loaded");
     }
 
@@ -93,20 +108,48 @@ public class SaveAndLoad : MonoBehaviour
         _tempSave.currentHealthCharacter = 10;
         _tempSave.currentHandgunBullets = 15;
         _tempSave.openDoors = new List<OpenDoor>();
-        _tempSave.zombiesToDestroy = new Dictionary<string, List<string>>();
-        _tempSave.itemsToDestroy = new Dictionary<string, List<string>>();
+        _tempSave.objectsToDestroy = new List<ObjectsPerScene>();
         _tempSave.inventoryCharacter = new List<InventoryCharacter> ();
         DeafultDoorsStatus();
         DefaultInventoryCharacter();
     }
 
-    public void AddZombieToDestroy(string sceneName, string zombieName)
+    public void AddObjectToDestroy(GameObject objectToDestroy)
     {
-        if (!_tempSave.zombiesToDestroy.ContainsKey(sceneName))
+        string sceneName = SceneManager.GetActiveScene().name;
+        bool _zombieAdded = false;
+        string _objectName = GetGameObjectPath(objectToDestroy);
+        foreach (ObjectsPerScene _objectsInScene in _tempSave.objectsToDestroy)
         {
-            _tempSave.zombiesToDestroy.Add(sceneName, new List<string>());
+            if(_objectsInScene.sceneName == sceneName)
+            {
+                _objectsInScene.gameObjectNames.Add(_objectName);
+                _zombieAdded = true;
+                break;
+            }
         }
-        _tempSave.zombiesToDestroy[sceneName].Add(zombieName);
+        if (!_zombieAdded)
+        {
+            List<string> _tempZombieList = new List<string>();
+            _tempZombieList.Add(_objectName);
+            _tempSave.objectsToDestroy.Add(new ObjectsPerScene(sceneName, _tempZombieList));
+
+        }
+    }
+
+    public void DestroyObjectsFromList()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        foreach (ObjectsPerScene _zombiesInScene in _tempSave.objectsToDestroy)
+        {
+            if (_zombiesInScene.sceneName == sceneName)
+            {
+                foreach (string _zombieObjectPath in _zombiesInScene.gameObjectNames)
+                {
+                    Destroy(GameObject.Find(_zombieObjectPath));
+                }
+            }
+        }
     }
 
     public void AddItemToDestroy(string sceneName, string zombieName)
@@ -171,5 +214,17 @@ public class SaveAndLoad : MonoBehaviour
         _tempSave.inventoryCharacter.Add(new InventoryCharacter(-1, 0));
         _tempSave.inventoryCharacter.Add(new InventoryCharacter(-1, 0));
         _tempSave.inventoryCharacter.Add(new InventoryCharacter(-1, 0));
+    }
+
+    private static string GetGameObjectPath(GameObject gameObject)
+    {
+        string pathGameObject = gameObject.transform.name;
+        while (gameObject.transform.parent != null)
+        {
+            gameObject = gameObject.transform.parent.gameObject;
+            pathGameObject = gameObject.transform.name + "/" + pathGameObject;
+        }
+        Debug.Log(pathGameObject);
+        return pathGameObject;
     }
 }

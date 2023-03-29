@@ -54,11 +54,10 @@ public class InventoryController : MonoBehaviour
         int result = 0;
         for (int i = 0; i < _characterData.inventoryCharacter.Count; i++)
         {
-            if (_characterData.inventoryCharacter[i].id == id)
+            if (_characterData.inventoryCharacter[i].id == id || _characterData.inventoryCharacter[i].id == -1)
             {
                 if (quantity + _characterData.inventoryCharacter[i].quantity <= objectsList.itemLibrary[id].maxQuantity)
                 {
-                    // _characterData.inventoryCharacter[i, 1] += quantity;
                     int newQuantity = _characterData.inventoryCharacter[i].quantity + quantity;
                     _characterData.inventoryCharacter[i] = new InventoryCharacter(id, newQuantity);
                     result = quantity;
@@ -66,25 +65,13 @@ public class InventoryController : MonoBehaviour
                 else if (_characterData.inventoryCharacter[i].quantity < objectsList.itemLibrary[id].maxQuantity)
                 {
                     result = objectsList.itemLibrary[id].maxQuantity - _characterData.inventoryCharacter[i].quantity;
-                    // _characterData.inventoryCharacter[i, 1] = objectsList.itemLibrary[id].maxQuantity;
                     _characterData.inventoryCharacter[i] = new InventoryCharacter(id, objectsList.itemLibrary[id].maxQuantity);
                 }
-                break;
+                onBulletInventoryChangeUE?.Invoke(GetQuantityObject(1));
+                onBulletInventoryChange?.Invoke(GetQuantityObject(1));
+                Debug.Log("Bullets after add: " + GetQuantityObject(1));
+                return result;
             }
-            if (_characterData.inventoryCharacter[i].id == -1)
-            {
-                _characterData.inventoryCharacter[i] = new InventoryCharacter(id, quantity);
-                // _characterData.inventoryCharacter[i, 0] = id;
-                // _characterData.inventoryCharacter[i, 1] = quantity;
-                result = quantity;
-                break;
-            }
-        }
-        if (id == 1 && result != 0)
-        {    
-            onBulletInventoryChangeUE?.Invoke(GetQuantityObject(1));
-            onBulletInventoryChange?.Invoke(GetQuantityObject(1));
-            Debug.Log("Bullets after add: " + GetQuantityObject(1));
         }
         return result;
     }
@@ -103,14 +90,12 @@ public class InventoryController : MonoBehaviour
                 if (quantity <= _characterData.inventoryCharacter[i].quantity)
                 {
                     int newQuantity = _characterData.inventoryCharacter[i].quantity - quantity;
-                    // _characterData.inventoryCharacter[i, 1] -= quantity;
                     _characterData.inventoryCharacter[i] = new InventoryCharacter(id, newQuantity);
                     result = 0;
                 }
                 else
                 {
                     result = quantity - _characterData.inventoryCharacter[i].quantity;
-                    // _characterData.inventoryCharacter[i, 1] = 0;
                     _characterData.inventoryCharacter[i] = new InventoryCharacter(id, 0);
                 }
                 if (_characterData.inventoryCharacter[i].quantity == 0)
@@ -120,14 +105,10 @@ public class InventoryController : MonoBehaviour
                         if (j == _characterData.inventoryCharacter.Count - 1)
                         {
                             _characterData.inventoryCharacter[j] = new InventoryCharacter(-1, 0);
-                            // _characterData.inventoryCharacter[j, 0] = -1;
-                            // _characterData.inventoryCharacter[j, 1] = 0;
                         }
                         else
                         {
-                            _characterData.inventoryCharacter[j] = _characterData.inventoryCharacter[j + 1];
-                            // _characterData.inventoryCharacter[j, 0] = _characterData.inventoryCharacter[j + 1, 0];
-                            // _characterData.inventoryCharacter[j, 1] = _characterData.inventoryCharacter[j + 1, 1];                            
+                            _characterData.inventoryCharacter[j] = _characterData.inventoryCharacter[j + 1];                     
                         }
                     }
                 }

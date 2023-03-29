@@ -41,16 +41,16 @@ public class WeaponAttributes : MonoBehaviour
 
     private void Awake()
     {
-    }
-
-    private void Start()
-    {
         // Agrega como suscriptor el método HasBulletsInInventoryHandler al evento onBulletInventoryChange.
         // de la clase CharacterEntity
         _inventoryController.onBulletInventoryChange += HasBulletsInInventoryHandler;
 
         // Agrega como suscriptor el método ShootWeapon al evento onShoot de la clase LaserPointer.
         _laserPointer.onShoot += ShootWeapon;
+    }
+
+    private void Start()
+    {
         // Invoca los eventos definidos en esta clase para inicializar las variables de otras.
         onBulletShot?.Invoke(_weaponObject.currentBullets, 0);
         onBulletChange?.Invoke(_weaponObject.currentBullets, _weaponObject.maxBullets);

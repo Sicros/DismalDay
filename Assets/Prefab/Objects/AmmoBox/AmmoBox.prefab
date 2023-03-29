@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6157515007809189668}
   - component: {fileID: 2893815620432121106}
   - component: {fileID: 8868832943902994923}
-  - component: {fileID: 7497649901819163530}
   - component: {fileID: 752155569714320790}
   - component: {fileID: 7700549036664495166}
   - component: {fileID: 4512602959633398988}
@@ -89,19 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7497649901819163530
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7145165998672086327}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.47200003, y: 0.22600001, z: 0.21999992}
-  m_Center: {x: 0, y: 0.113000005, z: -0.007910401}
 --- !u!108 &752155569714320790
 Light:
   m_ObjectHideFlags: 0
@@ -200,7 +186,6 @@ MonoBehaviour:
   quantity: 15
   pickupObject: {fileID: 7815940762119639545}
   inventoryController: {fileID: 0}
-  characterInputs: {fileID: 0}
   uiText: {fileID: 0}
   _objectList: {fileID: 0}
 --- !u!135 &1622501994
@@ -214,7 +199,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0.113000005, z: -0.007910401}
 --- !u!1 &7936299094126549701
 GameObject:
@@ -304,7 +289,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
