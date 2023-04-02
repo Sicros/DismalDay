@@ -24,6 +24,7 @@ public class PickupItem : MonoBehaviour
     // Referencia a los inputs del personaje.
     private KeyInputsSetup _inputs;
 
+    // Carga del componente relacionada los inputs del jugador.
     private void Start()
     {
         GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);

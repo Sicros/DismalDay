@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ZombieData
   m_EditorClassIdentifier: 
   maximumHealth: 10
-  speedWalkingUp: 1.75
+  speedWalkingUp: 2.75
   speedWalkingDown: 1.75
   rotationSpeed: 1
   attackDamage: 3
@@ -22,4 +22,3 @@ MonoBehaviour:
   coordinateAnimationWithAttack: 0.8
   keepDistancePlayer: 1.25
   keepDistanceShoot: 3
-  reachedShootSound: 0

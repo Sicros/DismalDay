@@ -90,11 +90,13 @@ public class UIText : MonoBehaviour
         _timeToDeleteInteraction = Time.time + timeBetweenInteractions;
     }
 
+    // Método que permite actualizar el texto mostrado en el panel de Documento.
     public void UpdateDocumenText(string textToPrint)
     {
         _textDocument.text = textToPrint;
     }
 
+    // Habilita la pantalla de GameOver.
     public void GameOverScreen()
     {
         _gameOverObject.SetActive(true);

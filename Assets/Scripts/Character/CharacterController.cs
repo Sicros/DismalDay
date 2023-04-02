@@ -22,6 +22,8 @@ public class CharacterController : MonoBehaviour
     // Referencia a la camara del personaje.
     public CharacterCamera characterCamera;
 
+    // Comienza con la optención de los componentes relacionados a inputs del teclado,
+    // animator y la entidad del personaje.
     private void Start()
     {
         GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
@@ -29,6 +31,9 @@ public class CharacterController : MonoBehaviour
         transform.TryGetComponent<CharacterEntity>(out _characterEntity);
     }
 
+    // En cada update se revisa el movimiento, rotación y animación del personaje,
+    // además de verificar si el estado de correr está activo o no. Todas estas acciones
+    // solo son realizadas si su vida es mayor a 0.
     void Update()
     {
         if (_characterEntity.GetCurrentHealth() > 0)
@@ -40,18 +45,22 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    // Método que permite al personaje moverse hacia delante y atrás.
     private void MoveCharacter()
     {
-        // Comando para mover el personaje hacía delante.
-        if (Input.GetKey(_inputs.GetGoUpKey()) && !Input.GetKey(_inputs.GetGoDownKey()))
+        if (!_animator.GetBool("isReloading"))
         {
-            transform.Translate(0, 0, _characterEntity.GetCurrentSpeed() * Time.deltaTime);
-        }
+            // Comando para mover el personaje hacia delante.
+            if (Input.GetKey(_inputs.GetGoUpKey()) && !Input.GetKey(_inputs.GetGoDownKey()))
+            {
+                transform.Translate(0, 0, _characterEntity.GetCurrentSpeed() * Time.deltaTime);
+            }
 
-        // Comando para mover el personaje hacía atrás.
-        if (!Input.GetKey(_inputs.GetGoUpKey()) && Input.GetKey(_inputs.GetGoDownKey()))
-        {
-            transform.Translate(0, 0, -_characterEntity.GetCurrentSpeed() * Time.deltaTime);
+            // Comando para mover el personaje hacia atrás.
+            if (!Input.GetKey(_inputs.GetGoUpKey()) && Input.GetKey(_inputs.GetGoDownKey()))
+            {
+                transform.Translate(0, 0, -_characterEntity.GetCurrentSpeed() * Time.deltaTime);
+            }
         }
     }
 
@@ -79,6 +88,7 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    // Coorrutina para que el personaje pueda realizar un giro en 180°.
     private IEnumerator SmoothlyRotate(float turnDegrees)
     {
         Quaternion startRotation = transform.rotation;
@@ -95,6 +105,7 @@ public class CharacterController : MonoBehaviour
         transform.rotation = targetRotation;
     }
 
+    // Método que permite alternar entre si el personaje está caminando o corriendo.
     private void RunCharacter()
     {
         if (!Input.GetMouseButton(_inputs.GetAimButton()))
@@ -113,6 +124,8 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    // Método que controla las animaciones del personaje, por medio de los parámetros
+    // booleanos y trigger definidos en el animator.
     private void AnimationCharacter()
     {
         // Animación para que personaje corra hacía delante.
@@ -152,19 +165,21 @@ public class CharacterController : MonoBehaviour
         }
     }
 
+    // Método que permite transicionar a la animación de caminata hacia delante del personaje.
     private void WalkingTransition(bool _isWalking)
     {
         _animator.SetBool("isWalking", _isWalking);
     }
 
+    // Método que permite transicionar a la animación de correr del personaje.
     private void RunningTransition(bool _isRunning)
     {
         _animator.SetBool("isRunning", _isRunning);
     }
 
+    // Método que permite transicionar a la animación de caminata hacia atrás del personaje.
     private void WalkingBackTransition(bool _isWalkingBack)
     {
         _animator.SetBool("isWalkingBack", _isWalkingBack);
     }
-
 }

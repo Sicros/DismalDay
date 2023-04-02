@@ -64,6 +64,7 @@ public class ZombieAtacking : MonoBehaviour
                 AttackingTransition(false);
             }
         }
+        // Reinicia todas las animaciones y el personaje ha muerto.
         if (other.gameObject.tag == "PlayerDeath")
         {
             _animator.Rebind();

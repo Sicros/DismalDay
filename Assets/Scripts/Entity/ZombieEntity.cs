@@ -101,7 +101,7 @@ public class ZombieEntity : ObjectEntity
         return zombieData.keepDistanceShoot;
     }
 
-    // Reotrna la distancia que mantiene con el jugador.
+    // Retorna la distancia que mantiene con el jugador.
     public float GetKeepDistancePlayer()
     {
         return zombieData.keepDistancePlayer;

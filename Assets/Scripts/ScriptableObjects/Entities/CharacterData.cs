@@ -10,15 +10,17 @@ public class CharacterData : ObjectEntityData
     // Vida actual del personaje;
     public float currentHealth;
 
+    // Velocidad con la que el personaje avanza hacia delante.
     public float speedRunningUp;
 
+    // Velocidad con la que el personaje avanza hacia atrás.
     public float speedRunningDown;
 
+    // Capacidad máxima del inventario del personaje.
     public int maxInventoryCapacity;
 
     // Arreglo que simula el inventario del personaje.
     // Solo tiene espacio para llevar 8 objetos diferentes. A partir de ahí,
     // la cantidad máxima de cada uno se obtiene de la biblioteca de objeto.
-    // public int[,] inventoryCharacter;
     public List<InventoryCharacter> inventoryCharacter;
 }

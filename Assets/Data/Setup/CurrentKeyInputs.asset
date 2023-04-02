@@ -18,5 +18,7 @@ MonoBehaviour:
   turnRightKey: 100
   runKey: 32
   interactionKey: 101
+  escapeKey: 27
+  reloadKey: 114
   aimButton: 1
   actionButton: 0

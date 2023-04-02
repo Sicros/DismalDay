@@ -22,9 +22,13 @@ public class ZombieWatching : MonoBehaviour
         transform.parent.parent.TryGetComponent<Animator>(out _animator);
     }
 
+    // El personaje, al entrar en el rango del zombie, esté comenzará a mirar hacia su posición.
     private void OnTriggerEnter(Collider other)
     {
-        _animator.SetBool("isWatching", true);
+        if (other.gameObject.tag == "Player" && _zombie.GetCurrentHealth() > 0)
+        {
+            _animator.SetBool("isWatching", true);
+        }
     }
 
     // Si un objeto con la etiqueta "Player" se queda en este radio de activación, el zombie

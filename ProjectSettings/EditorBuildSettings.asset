@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OfficeBuilding/MainHall02.unity
     guid: 99ddf5c67a4e05e4ea4744147fc141ac
+  - enabled: 1
+    path: Assets/Scenes/ConfigScreen/Instructions.unity
+    guid: 46f472e20991c33499c3a5b74821850f
   m_configObjects: {}

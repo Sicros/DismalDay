@@ -51,4 +51,16 @@ public class KeyInputsSetup : MonoBehaviour
     {
         return keyInputs.turnRightKey;
     }
+
+    // Obtiene tecla de escape.
+    public KeyCode GetEscapeKey()
+    {
+        return keyInputs.escapeKey;
+    }
+
+    // Obtiene tecla para recargar arma.
+    public KeyCode GetRealoadKey()
+    {
+        return keyInputs.reloadKey;
+    }
 }

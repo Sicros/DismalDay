@@ -20,3 +20,21 @@ MonoBehaviour:
   currentHealth: 10
   speedRunningUp: 5
   speedRunningDown: 2
+  maxInventoryCapacity: 0
+  inventoryCharacter:
+  - id: 1
+    quantity: 60
+  - id: -1
+    quantity: 0
+  - id: -1
+    quantity: 0
+  - id: -1
+    quantity: 0
+  - id: -1
+    quantity: 0
+  - id: -1
+    quantity: 0
+  - id: -1
+    quantity: 0
+  - id: -1
+    quantity: 0

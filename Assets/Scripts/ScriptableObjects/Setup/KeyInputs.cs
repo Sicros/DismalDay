@@ -1,5 +1,13 @@
 using UnityEngine;
 
+// Definido de variable que almacena cada botón asociado al mouse.
+public enum MouseKeys
+{
+    PrimaryKey,
+    SecondaryKey,
+    MiddleKey
+}
+
 [CreateAssetMenu(menuName = "Setup/KeyInputs")]
 
 public class KeyInputs : ScriptableObject
@@ -21,6 +29,12 @@ public class KeyInputs : ScriptableObject
 
     // Tecla que permite al personaje interactura con su entorno.
     public KeyCode interactionKey;
+
+    // Botón de escape para salir de opciones y otros ambientes del juego.
+    public KeyCode escapeKey;
+
+    // Botón para recargar el arma.
+    public KeyCode reloadKey;
 
     // Botón de apuntado. Utilizado también para el cambio de cámara.
     public MouseKeys aimButton;

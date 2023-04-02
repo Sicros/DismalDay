@@ -20,7 +20,4 @@ public class ZombieData : ObjectEntityData
 
     // Distancia que se mantiene alejado el zombie con el punto en el que se genera un disparo.
     public float keepDistanceShoot;
-
-    // Variable que indica si el zombie ya alcanzó el punto del disparo.
-    public bool reachedShootSound;
 }

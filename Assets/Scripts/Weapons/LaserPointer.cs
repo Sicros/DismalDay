@@ -86,6 +86,7 @@ public class LaserPointer : MonoBehaviour
             GetMainWeapon();
             ControlPointer();
             Shooting();
+            DrawRayPoint();
         }
     }
 
@@ -116,6 +117,10 @@ public class LaserPointer : MonoBehaviour
                 // Solo se consideran aquellos objeto del layer especificado y se ignoran los colliders de tipo trigger.
                 if (Physics.Raycast(transform.position, transform.forward, out hit, maxDistance, layerToCollide, QueryTriggerInteraction.Ignore))
                 {
+                    Vector3 dir = (hit.transform.position - hit.point).normalized;
+
+                    Debug.DrawRay (hit.point, dir  * 50f, Color.green);
+
                     // Variable que almacena los atributos del zombie con el que colisiona el raycast.
                     _zombie = hit.collider.transform.GetComponent<ZombieEntity>();
 
@@ -138,6 +143,18 @@ public class LaserPointer : MonoBehaviour
                 */
                 // Physics.OverlapSphere(transform.position, 50, )
             }
+        }
+    }
+
+    private void DrawRayPoint()
+    {
+        if (Input.GetMouseButton(_inputs.GetAimButton()))
+        {
+            transform.Find("Line").gameObject.SetActive(true);
+        }
+        else
+        {
+            transform.Find("Line").gameObject.SetActive(false);
         }
     }
 

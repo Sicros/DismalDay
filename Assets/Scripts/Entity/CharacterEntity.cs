@@ -13,6 +13,9 @@ public class CharacterEntity : ObjectEntity
     // Evento C# relacionado al cambio de la vida actual del personaje.
     public UnityEvent<float, float> onHealthChange;
 
+    // Evento C# relacionado al cambio de la vida actual del personaje.
+    public UnityEvent onCharacterDeathUE;
+
     // Evento C# relacionado al cambio de la vida actual del personaje, para eventos C#.
     public Action<float, float> onHealthChangeC;
 
@@ -26,6 +29,7 @@ public class CharacterEntity : ObjectEntity
         // Obtención del componente de animación al inicio del juego.
         transform.TryGetComponent<Animator>(out _animator);
         onHealthChangeC?.Invoke(characterData.currentHealth, characterData.maximumHealth);
+        onHealthChange?.Invoke(characterData.currentHealth, characterData.maximumHealth);
     }
 
     // Método que reproduce la animación de muerte del personaje.
@@ -56,6 +60,9 @@ public class CharacterEntity : ObjectEntity
 
             // Se cambia la etiqueta del personaje para que no siga activando otros triggers.
             gameObject.tag = "PlayerDeath";
+
+            // Carga de pantalla de GameOver
+            onCharacterDeathUE?.Invoke();
         }
 
         // Caso de que la vida actual del personaje sea mayor al daño recibido.
@@ -142,5 +149,11 @@ public class CharacterEntity : ObjectEntity
     public float GetMaximumHealth()
     {
         return characterData.maximumHealth;
+    }
+
+    // Animación de recarga.
+    public void ReloadTransition(bool _isReloading)
+    {
+        _animator.SetBool("isReloading", _isReloading);
     }
 }

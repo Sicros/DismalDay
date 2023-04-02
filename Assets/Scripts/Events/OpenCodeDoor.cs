@@ -2,24 +2,26 @@ using UnityEngine;
 
 public class OpenCodeDoor : MonoBehaviour
 {
+    // Referencia a la apertura de una puerta.
     [SerializeField] private OpenMainDoor openMainDoor;
 
+    // Texto que define el código para abrir una puerta.
     [SerializeField] private string codeDoor;
 
+    // Referencia al canvas que permite mostrar el panel para ingresar el código.
     [SerializeField] private GameObject canvasObject;
     
     // Referencia a los inputs del personaje.
     private KeyInputsSetup _inputs;
 
+    // Se inicializa el componente de inputs además de desactivar el canvas del código al inicio.
     private void Start()
     {
         GameManager.instance.TryGetComponent<KeyInputsSetup>(out _inputs);
         canvasObject.SetActive(false);
     }
 
-    // Al entrar en contacto con el objeto, este será recogido, siempre y cuando
-    // el personaje tenga espacio en su inventario o no lleve la cantidad máxima del
-    // objeto.
+    // Si el personaje está en el rango del panel e interactua con él, podrá ingresar el código.
     private void OnTriggerStay(Collider other)
     {
         if (
@@ -40,6 +42,7 @@ public class OpenCodeDoor : MonoBehaviour
         }
     }
 
+    // Método que revisa si el código ingresado es el correcto o no.
     public void OpenDoor(string inputCode)
     {
         if (codeDoor == inputCode)

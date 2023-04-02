@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Valores que son almacenados en los archivos de guardado.
 [Serializable]
 public struct SaveData
 {
@@ -11,10 +12,10 @@ public struct SaveData
     public int currentHandgunBullets;
     public List<OpenDoor> openDoors;
     public List<ObjectsPerScene> objectsToDestroy;
-    public Dictionary<string, List<string>> itemsToDestroy;
     public List<InventoryCharacter> inventoryCharacter;
 }
 
+// Estructura que guarda información de las puertas abiertas.
 [Serializable]
 public struct OpenDoor
 {
@@ -28,6 +29,7 @@ public struct OpenDoor
     }
 }
 
+// Estructura que guarda información del inventario del personaje.
 [Serializable]
 public struct InventoryCharacter
 {
@@ -41,6 +43,7 @@ public struct InventoryCharacter
     }
 }
 
+// Estructura que guarda objetos que deben ser destruidos al cargar la escena.
 [Serializable]
 public struct ObjectsPerScene
 {
@@ -56,12 +59,22 @@ public struct ObjectsPerScene
 
 public class SaveAndLoad : MonoBehaviour
 {
+    // Referencia a los datos del personaje.
     [SerializeField] private CharacterData characterData;
+
+    // Referencia a los datos del arma.
     [SerializeField] private WeaponObject weaponData;
+
+    // Lista de las puertas y su estado.
     [SerializeField] private DoorObject[] doorObjects;
+
+    // Variable que almacena información de la partida actual.
     private SaveData _tempSave;
+
+    // Instanciación del componente actual.
     public static SaveAndLoad instance;
 
+    // Evita que el objeto sea destruido al cargar una nueva escena.
     private void Awake()
     {
         if (instance != null)
@@ -77,13 +90,23 @@ public class SaveAndLoad : MonoBehaviour
         NewGame();
     }
 
+    // Método que permite cargar los datos guardados desde un archivo tipo JSON. Estos valores
+    // son asignados a una variable temporal y aplicados a los datos de cada objeto que corresponda.
     public void LoadDataJSON(string saveDataName)
     {
-        if (System.IO.File.Exists(Application.dataPath + saveDataName))
-        {
-            var _saveDataJson = File.ReadAllText(Application.dataPath + saveDataName);
-            var _tempSave = JsonUtility.FromJson<SaveData>(_saveDataJson);
-        }
+        #if UNITY_EDITOR
+            if (System.IO.File.Exists(Application.dataPath + saveDataName))
+            {
+                var _saveDataJson = File.ReadAllText(Application.dataPath + saveDataName);
+                _tempSave = JsonUtility.FromJson<SaveData>(_saveDataJson);
+            }
+        #else
+            if (System.IO.File.Exists(Application.persistentDataPath + saveDataName))
+            {
+                var _saveDataJson = File.ReadAllText(Application.persistentDataPath + saveDataName);
+                _tempSave = JsonUtility.FromJson<SaveData>(_saveDataJson);
+            }
+        #endif
         characterData.currentHealth = _tempSave.currentHealthCharacter;
         characterData.inventoryCharacter = _tempSave.inventoryCharacter;
         weaponData.currentBullets = _tempSave.currentHandgunBullets;
@@ -92,6 +115,9 @@ public class SaveAndLoad : MonoBehaviour
         Debug.Log("Data loaded");
     }
 
+    // Método que permite guardar el estado actual del juego en una archivo tipo JSON.
+    // Se reescriben los últimos valores obtenidos que sean de interés en la variable temporal,
+    // la que es guardada en el archivo.
     public void SaveDataJSON(string saveDataName)
     {
         _tempSave.currentHealthCharacter = characterData.currentHealth;
@@ -99,10 +125,15 @@ public class SaveAndLoad : MonoBehaviour
         _tempSave.currentHandgunBullets = weaponData.currentBullets;
         SaveDoorsStatus();
         var stringjson = JsonUtility.ToJson(_tempSave);
-        File.WriteAllText(Application.dataPath + saveDataName, stringjson);
+        #if UNITY_EDITOR
+            File.WriteAllText(Application.dataPath + saveDataName, stringjson);
+        #else
+            File.WriteAllText(Application.persistentDataPath + saveDataName, stringjson);
+        #endif
         print("Saving");
     }
 
+    // Crea un variable temporal con valores iniciales.
     public void NewGame()
     {
         _tempSave.currentHealthCharacter = 10;
@@ -110,10 +141,13 @@ public class SaveAndLoad : MonoBehaviour
         _tempSave.openDoors = new List<OpenDoor>();
         _tempSave.objectsToDestroy = new List<ObjectsPerScene>();
         _tempSave.inventoryCharacter = new List<InventoryCharacter> ();
+        _tempSave.objectsToDestroy = new List<ObjectsPerScene> ();
         DeafultDoorsStatus();
         DefaultInventoryCharacter();
     }
 
+    // Método que permite agregar a la lista los objetos que deben ser destruidos por escena, si es que
+    // estos ya fueron eliminados (en caso de enemigos) o recogidos (en caso de objetos).
     public void AddObjectToDestroy(GameObject objectToDestroy)
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -137,6 +171,8 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
 
+    // Método que permite destruir todos los objetos que se encuentren en la lista, relacionados
+    // a la escena que haya sido cargada.
     public void DestroyObjectsFromList()
     {
         string sceneName = SceneManager.GetActiveScene().name;
@@ -152,15 +188,8 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
 
-    public void AddItemToDestroy(string sceneName, string zombieName)
-    {
-        if (!_tempSave.itemsToDestroy.ContainsKey(sceneName))
-        {
-            _tempSave.itemsToDestroy.Add(sceneName, new List<string>());
-        }
-        _tempSave.itemsToDestroy[sceneName].Add(zombieName);
-    }
-
+    // Método que permite actualizar el estado de las puertas, marcando como abiertas aquellas que
+    // ya hayan sido abiertas o no.
     public void ReplaceDoorsStatus()
     {
         foreach (DoorObject doorObject in doorObjects)
@@ -176,6 +205,7 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
 
+    // Añade el estado de la puerta a una lista, que es cargada en cada escena.
     public void SaveDoorsStatus()
     {
         for (int i = 0; i < _tempSave.openDoors.Count; i++)
@@ -191,6 +221,7 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
 
+    // Define el estado inicial de todas las puertas.
     public void DeafultDoorsStatus()
     {
         _tempSave.openDoors.Add(new OpenDoor(1, false));
@@ -204,6 +235,7 @@ public class SaveAndLoad : MonoBehaviour
         _tempSave.openDoors.Add(new OpenDoor(9, true));
     }
 
+    // Define el estado inicial del inventario del personaje.
     public void DefaultInventoryCharacter()
     {
         _tempSave.inventoryCharacter.Add(new InventoryCharacter(-1, 0));
@@ -216,6 +248,7 @@ public class SaveAndLoad : MonoBehaviour
         _tempSave.inventoryCharacter.Add(new InventoryCharacter(-1, 0));
     }
 
+    // Obtiene la ruta dentro del directorio de un objeto.
     private static string GetGameObjectPath(GameObject gameObject)
     {
         string pathGameObject = gameObject.transform.name;
@@ -226,5 +259,14 @@ public class SaveAndLoad : MonoBehaviour
         }
         Debug.Log(pathGameObject);
         return pathGameObject;
+    }
+
+    // Reemplazar valores guardados por default
+    public void ApplyValues()
+    {
+        characterData.currentHealth = _tempSave.currentHealthCharacter;
+        characterData.inventoryCharacter = _tempSave.inventoryCharacter;
+        weaponData.currentBullets = _tempSave.currentHandgunBullets;
+        ReplaceDoorsStatus();
     }
 }
