@@ -49,3 +49,9 @@ A continuación se entrega el listado con cada uno de los puntos.
 - Optimizada interacción entre zombies y disparo. Ya no se trabajar con listas ni updates, ya que todo este proceso se apoya en el uso de NavMeshAgent. Al realizar un disparo, todos aquellos enemigos que se encuentren en el rango, se les ajustará su nueva posición de destino e irán hasta este punto. Esta acción se detiene si es que llegan a cruzarse con el jugador o si se encuentran a menos de 3 metros de distancia con su destino.
 - Interacción con objetos del escenario. Este punto se explota enormemente por medio de los inputs del jugador y el Canvas, Las interacciones permiten realizar ciertas acciones con objetos del escenario, como municiones, puertas, notas, paneles, entre otros. De acuerdo al tipo de interacción, se mostrará un mensaje en la parte inferior de la pantalla. También al revisar documentos, se mostrará su contenido en medio de la pantalla, el cual se puede navegar utilizando el scrollbar.
 - Sistema de guardado. Existe un sistema de guardado con el que el jugador no puede interactura, pero si es utilizado para guardar información entre una escena y otra, para así llevar un registro de los enemigos que se han eliminado, objetos recogidos, puertas abiertas, inventario del personaje y su vida actual.
+
+## Actualizaciones
+
+### 2023-04-03
+- Corrección de RigidBody de personaje. Se corrige problema que al apuntar hacia arriba y caminar el personaje avanza hacia al cielo.
+- Se cambia estructura de objetos. Se creó un scriptable object para identificar a cada uno de los objetos y esos son agregagdos a una lista desde el cual permite que otras clases puedan acceder a cada uno de sus elementos.

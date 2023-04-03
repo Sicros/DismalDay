@@ -8,53 +8,24 @@ Script que contiene la biblioteca de objetos utilizados en el juego
 public class ObjectsList : MonoBehaviour
 {
     public Dictionary<int, Item> itemLibrary = new Dictionary<int, Item>();
+    [SerializeField] private ItemObject[] itemObjects;
 
     private void Awake()
     {
-        itemLibrary.Add(
-            0,
-            new Item {
-                nameObject = "MedKit",
-                description = "Cura 5 puntos de vida",
-                healAmount = 5f,
-                maxQuantity = 3,
-                consumable = true,
-                keyItem = false
-            }
-        );
-        itemLibrary.Add(
-            1,
-            new Item {
-                nameObject = "Balas Pistola",
-                description = "Munición para la pistola",
-                healAmount = 0f,
-                maxQuantity = 60,
-                consumable = true,
-                keyItem = false
-            }
-        );
-        itemLibrary.Add(
-            2,
-            new Item {
-                nameObject = "Llave Complejo de Oficinas",
-                description = "Llave que permite abrir la puerta principal del complejo de oficinas",
-                healAmount = 0f,
-                maxQuantity = 1,
-                consumable = false,
-                keyItem = true
-            }
-        );
-        itemLibrary.Add(
-            3,
-            new Item {
-                nameObject = "Llave Pasillo Principal 2",
-                description = "Llave que permite abrir la puerta que lleva hacía el segundo tramo del pasillo principal",
-                healAmount = 0f,
-                maxQuantity = 1,
-                consumable = false,
-                keyItem = true
-            }
-        );
+        foreach (ItemObject _itemObject in itemObjects)
+        {
+            itemLibrary.Add(
+                _itemObject.id,
+                new Item(
+                    _itemObject.nameObject,
+                    _itemObject.description,
+                    _itemObject.healAmount,
+                    _itemObject.maxQuantity,
+                    _itemObject.consumable,
+                    _itemObject.keyItem
+                )
+            );
+        }
     }
 }
 
@@ -67,4 +38,14 @@ public struct Item {
     public int maxQuantity;
     public bool consumable;
     public bool keyItem;
+
+    public Item (string name, string desc, float heal, int maxq, bool isConsumable, bool isKey)
+    {
+        nameObject = name;
+        description = desc;
+        healAmount = heal;
+        maxQuantity = maxq;
+        consumable = isConsumable;
+        keyItem = isKey;
+    }
 }
